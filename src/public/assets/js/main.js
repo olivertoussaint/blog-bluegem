@@ -1,0 +1,1 @@
+$('#test').addClass('animated fadeInDown');
