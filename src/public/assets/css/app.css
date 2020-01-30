@@ -3,30 +3,30 @@
 html,
 body,
 header,
-.view {
+.carousel {
   height: 100%;
 }
 
+.carousel,.carousel .carousel-inner,.carousel .carousel-inner .active,.carousel .carousel-inner .carousel-item,.view,body,html{height:100%};
+
 a.navbar-brand >img.logo-content {
-	width: 60px;
+	width: 50px;
 }
 
 img.logo-content {
-	width: 60px;
+	width: 50px;
 }
+
+.navbar-brand {
+    font-size: 10px;
+}
+
 .navbar {
     background-color: transparent;
 }
 
 .top-nav-collapse {
     background-color: #4285F4;
-}
-
-#test {
-    -webkit-animation-delay: 2s;
-    -moz-animation-delay: 2s;
-    -ms-animation-delay: 2s;
-    -o-animation-delay: 2s;
 }
 
 @media only screen and (max-width: 768px) {

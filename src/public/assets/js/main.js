@@ -1,1 +1,1 @@
-$('#test').addClass('animated fadeInDown');
+   new WOW().init();
