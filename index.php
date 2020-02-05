@@ -3,16 +3,16 @@ session_start();
 
 require_once __DIR__.'/vendor/autoload.php';
 
-use Projet\controller\AllUserController;
+use Projet\controller\UserController;
 
 
 try {
 	if (isset($_GET['action']))	{	
 		if ($_GET['action'] == 'signIn') { 
-			$controller = new AllUserController();
+			$controller = new UserController();
 			$controller -> signIn();
 		} elseif ($_GET['action'] == 'signUp') {
-			$controller = new AllUserController();
+			$controller = new UserController();
 			$controller -> signUp();
 		}
 	} else // si je n'ai pas de $_GET ['action']
