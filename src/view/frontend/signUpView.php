@@ -6,8 +6,7 @@
         <div class="col-lg-6 col-md-8">
             <div class="alert blue-grey lighten-5">
                 <h2 class="text-center">Inscrivez-vous</h2>
-                <form name="registration" method="post">
-
+                <form action="index.php?=register" method="POST" id="form-registration">
                 <div id="registration">
                     <div class="form-group">
                         <label for="registration_username" class="required">Pseudo</label>
@@ -27,12 +26,7 @@
                                 <label for="registration_passwordConfirm" class="required">Confirmation de mot de passe</label>
                                 <input type="password" id="registration_passwordConfirm" name="registration[passwordConfirm]" required="required" placeholder="Veuillez confirmer votre mot de passe !" class="form-control" />
                             </div>
-                            <div class="form-group">
-                                <label for="registration_description">Description</label>
-                                <textarea id="registration_description" name="registration[description]" placeholder="Ecrivez une description (optionnel) ...." class="form-control">
-                                </textarea>
-                            </div>
-                            <input type="hidden" id="registration__token" name="registration[_token]" value="xrxkyVH2vLqtga2y4hwF1LuGv_AAhXRcEsDrOqvPCTU" />
+                           
                 </div>
                 <button class="btn btn-info my-4 btn-block" type="submit">S'inscrire</button>
                 <hr>
