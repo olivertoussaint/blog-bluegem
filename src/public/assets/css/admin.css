@@ -1,0 +1,112 @@
+
+  a.navbar-brand >img.logo-content {
+    width: 50px;
+  }
+  
+  .navbar{
+      background-color: #0277bd70 !important;
+  }
+  
+  .nav-link:hover {
+      color: royalblue;
+  }
+  
+  .dropdown-menu {
+      background-color: #c0e48deb;;
+  }
+  
+  img.logo-content {
+    width: 50px;
+  }
+  
+  .navbar-brand {
+      font-size: 10px;
+  }
+  
+  span.colored-logo {
+      font-family: "danielregular";
+      color: aquamarine;
+      text-shadow: 1px 5px 2px #1aafc8;
+  }
+
+  .mt-8 {
+    margin-top: 8rem !important;
+  }
+
+  .view-cascade {
+    padding: 1.6rem 1rem;
+    margin-top: -1.25rem;
+    color: #fff;
+    text-align: center;
+  }
+
+  ul.text-pos {
+    text-align-last: center;
+  }
+
+  .perso-hr {
+    margin-top: 0.2rem;
+    border: 0px;
+    border-top: 2px solid aquamarine;
+    width: 35px;
+    margin-right: 225px;
+    margin-bottom: -0.5rem;
+  }
+
+  .table {
+    color: #FFF;
+  }
+
+  .table.table a {
+    border-radius: 50%;
+  }
+
+  .btn-outline-white{
+    border-radius: 50%;
+  }
+  
+  .stylish-color-perso {
+    background-color: #294646 !important;
+  }
+  .pt-7 { padding-top: 7rem; }
+
+  .dark-theme { background-color: #181C30; }
+  .dark-theme.fixed-sn main { 
+    margin-left: 1rem;
+    margin-right: 1rem; }
+    @media (max-width: 1289px) {
+      .dark-theme.fixed-sn .double-nav,
+      .dark-theme.fixed-sn main,
+      .dark-theme.fixed-sn footer {
+        padding-left: 0; } }
+    @media (min-width: 1289px) {
+      .dark-theme.fixed-sn .double-nav .button-collapse {
+        display: none; } }
+    @media (max-width: 1289px) {
+      .dark-theme.fixed-sn .double-nav .button-collapse {
+        display: block;
+        position: relative;
+        font-size: 1.4rem;
+        margin-right: 10px;
+        margin-left: 10px; } }
+    .dark-theme header { border-top: 2px solid #1d8cf8; }
+      .dark-theme header .navbar {
+        box-shadow: none;
+        background-color: #181C30; }
+    .dark-theme .card { background-color: #27293d; }
+      .dark-theme .card .card-header { background-color: #27293d; }
+      .dark-theme .card.card-table .card-header { border-bottom: none; }
+    .dark-theme .btn.btn-sm { 
+      padding: .4rem 1.5rem .25rem;
+      font-size: .75rem;
+      font-weight: 500; }
+    .dark-theme i.icon { font-size: 1.1rem; }
+    .dark-theme i.icon.icon-blue {color: #36A2EB; }
+  .cell-small { width: 1rem; }
+  .dark-skin .side-nav .sidenav-bg:after, .dark-skin .side-nav .sidenav-bg.mask-strong:after { background: rgba(29, 140, 248, 0.8); }
+  .dark-skin .side-nav .collapsible li .collapsible-header.active { background-color: rgba(24, 28, 48, 0.8); }
+  .dark-skin .side-nav .collapsible li .collapsible-header:hover { background-color: rgba(24, 28, 48, 0.8); }
+  .dark-skin .side-nav .collapsible li a:not(.collapsible-header):hover, .dark-skin .side-nav .collapsible li a:not(.collapsible-header).active, .dark-skin .side-nav .collapsible li a:not(.collapsible-header):active { color: #67d5ff !important; }
+  
+  
+  
