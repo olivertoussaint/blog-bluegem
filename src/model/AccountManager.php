@@ -1,45 +1,87 @@
 <?php
 
-namespace Projet\Model;
+namespace Projet\model;
+
+require 'vendor/autoload.php';
+
+use Projet\model\Manager;
 
 class AccountManager extends Manager {
 
-	function controlRegister($pseudo,$email) 
+	function controlSignUp($pseudo, $email) 
 	{
-        $db = $this->dbConnect();
-        $isDuplicate = $db->prepare('SELECT pseudo, email FROM memebers WHERE pseudo =? OR email =?');
-        $isDuplicate -> execute(array($pseudo, $email));
+        $db      = $this->dbConnect();
+        $request = $db->prepare('SELECT pseudo, email FROM members WHERE pseudo =? OR email =?');
+        $request-> execute(array($pseudo, $email));
             
-        return $isDuplicate;
+        return $request;
     }
 
-	public function loginMember($pseudo)
+	function loginMember($pseudo)
     {
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, pseudo, password, role FROM members WHERE pseudo = ?');
-        $req->execute(array($pseudo));
-        $logMember = $req->fetch();
+        $db      = $this->dbConnect();
+        $request = $db->prepare('SELECT id, pseudo, password, role FROM members WHERE pseudo = ?');
+        $request->execute(array($pseudo));
+        $logMember = $request->fetch();
 
         return $logMember;
     }
 
-    public function checkPseudoMember($pseudo)
+    function checkPseudo($pseudo)
     {
-        $db  = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM members WHERE pseudo = :pseudo');
-        $req->execute(array('pseudo' => $pseudo));
-        $pseudoChecked = $req->fetch();
+        $db      = $this->dbConnect();
+        $request = $db->prepare('SELECT * FROM members WHERE pseudo = :pseudo');
+        $request->execute(array('pseudo' => $pseudo));
+        $pseudoChecked = $request->fetch();
 
         return $pseudoChecked;
     }
 
-	function createMember($pseudo,$email,$password) 
+    function checkMail($email) {
+        $db      = $this->dbconnect();
+        $request = $db->prepare('SELECT email FROM members WHERE email = ?');
+        $request->execute(array('email')); 
+        $emailChecked = $request->fetch();
+
+        return $emailChecked;
+    } 
+
+	function createMember($pseudo, $email, $password) 
 	{
         $db = $this->dbConnect();
-        // Account Insert 
-        $newMember = $db->prepare('INSERT INTO members (pseudo, email, avatar, password, role) VALUES (?, ?, ?, ?, 0)');
-            $newMember -> execute(array($pseudo, $email, "defaultUser.jpg", $password));
+        $newMember = $db->prepare('INSERT INTO members (pseudo, email, avatar, password, role, date_create_account) VALUES (?, ?, ?, ?, 0, NOW())');
+        $newMember -> execute(array($pseudo, $email, "default.PNG", $password));
             
         return $newMember;           
     }
+
+    function updateProfile()
+    {
+        $db = $this->dbConnect();
+        $updateProfile = $db->prepare('UPDATE members SET avatar = :avatar  WHERE id = :id');
+        $updatedProfile = $updateProfile->execute(array(
+            'avatar' => $_SESSION['id']));
+        
+        return $updatedProfile;
+    }
+
+    function getMembers() 
+    {
+        $db = $this->dbConnect();
+        $members = $db->query('SELECT id, pseudo, email, role, date_create_account FROM members ORDER BY id');
+
+        return $members;
+    }
+
+
+    public function inTable()
+    {
+        $db     = $this->dbconnect();
+        $query  = $db->query('SELECT COUNT(flagged) FROM comments');
+        $nombre = $query->fetch();
+        
+        return $nombre;
+    }
+
+
 }
