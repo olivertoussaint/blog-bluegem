@@ -60,7 +60,7 @@ class AccountManager extends Manager {
         $db = $this->dbConnect();
         $updateProfile = $db->prepare('UPDATE members SET avatar = :avatar  WHERE id = :id');
         $updatedProfile = $updateProfile->execute(array(
-            'avatar' => $_SESSION['id']));
+            'avatar' => $_SESSION['pseudo']));
         
         return $updatedProfile;
     }
@@ -73,15 +73,23 @@ class AccountManager extends Manager {
         return $members;
     }
 
+    public function deleteMember($memberId)
+    {
+        $db =$this->dbConnect();
+        $req = $db->prepare('DELETE FROM members WHERE id = ?');
+        $deletedMember = $req -> execute(array($memberId));
+
+        return $deletedMember;
+    }
+
 
     public function inTable()
     {
         $db     = $this->dbconnect();
-        $query  = $db->query('SELECT COUNT(flagged) FROM comments');
+        $query  = $db->query('SELECT COUNT(id_comment) FROM comments WHERE flagged = 1');
         $nombre = $query->fetch();
         
         return $nombre;
     }
-
 
 }

@@ -271,4 +271,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('src/public/template/template_form.php'); ?>
+<?php require('src/public/template/template_termsOfUse.php'); ?>

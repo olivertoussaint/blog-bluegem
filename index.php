@@ -41,18 +41,13 @@ try {
 			  throw new Exception('Tous les champs ne sont pas remplis !');
 	}
 
-		} elseif ($_GET['action'] == 'profile') {
+		} elseif ($_GET['action'] == 'updateProfile') {
 			// $msg = "";
             // $css_class = "";
 			$controller = new UserController();
-			$controller -> profile();
-		
-		} elseif ($_GET['action'] == 'updateProfile') {
-			//TODO
+			$controller -> updateProfile($_SESSION['id']);
 			
-		} 
-		
-		elseif ($_GET['action'] == 'addComment') {
+		} elseif ($_GET['action'] == 'addComment') {
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (isset($_SESSION['id']) && !empty($_POST['comment'])) {
 					$controller = new UserController();
@@ -79,16 +74,37 @@ try {
 		
 		} elseif ($_GET['action'] == 'reporting') {
 			$controller = new UserController();
-			$controller->newsReport($_GET['id'], $_SESSION['pseudo']);
+			$controller -> newsReport($_GET['id'], $_SESSION['pseudo']);
 
 		} elseif ($_GET['action'] == 'admin') {
 			if (isset($_SESSION['pseudo']) && ($_SESSION['role'] == '1')) {
 				$adminController = new AdminController();
 				$adminController -> admin();
-			} else {
+			}else{
 				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
                 header("Location: index.php");
                 exit;            
+			}
+		} elseif ($_GET['action'] == 'createNewsFeed') {
+			if (isset($_SESSION['pseudo']) && ($_SESSION['role'] == '1')) {
+				$adminController = new AdminController();
+				$adminController -> createNewsFeed();
+			} else {
+				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+				header("Location: index.php");
+				exit;
+			}
+
+		} elseif ($_GET['action'] == 'updateNews') {			
+			if (isset($_GET['id']) && $_GET['id'] > 0) {
+				if (isset($_SESSION) && ($_SESSION['role'] == '1')) {
+				$adminController = new AdminController();	
+				$adminController ->updatedNews($title, $content, $author, $category, $id); 
+				}  
+	        } else {
+				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+				header("Location: index.php");
+				exit;
 			}
 
 		} elseif ($_GET['action'] == 'validateComment') {
@@ -96,8 +112,13 @@ try {
 			// $controller -> newsReport();
 			
 		}  elseif ($_GET['action'] == 'deleteNews') {
-			// removeNews($_GET['id']);// ADMIN
+			$adminController = new AdminController();
+			$adminController -> removeNews($_GET['id']);// ADMIN
 
+
+		} elseif ($_GET['action'] == 'deleteMember') {
+			$adminController = new AdminController();
+			$adminController -> removeMember($_GET['id']);// ADMIN
 
 		} elseif ($_GET['action'] == 'termsOfUse') {
 			$controller = new UserController();
@@ -117,13 +138,10 @@ try {
 		}
 	} else 
 	{
-
 		$controller = new Usercontroller;
 		$controller -> index();
-		// $controller -> listNews();
 	}
 }
-
 
 catch (Exception $e) 
 {

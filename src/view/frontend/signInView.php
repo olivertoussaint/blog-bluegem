@@ -1,36 +1,43 @@
-<?php  $title = 'Login du membre' ; ?> 
+<?php  $title = 'Profil du membre' ; ?> 
 <?php  ob_start (); ?>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3 col-md-2">&nbsp;</div>
-    <div class="col-lg-6 col-md-8">
-      <div class="alert blue-grey lighten-5">
-        <form class="text-center border border-light p-5" action="#!">
-          <p class="h4 mb-4">Connectez vous</p>
-          <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
-          <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-          <div class="d-flex justify-content-around">
-            <div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                <label class="custom-control-label" for="defaultLoginFormRemember">Se souvenir de moi</label>
-              </div>
-            </div>
-            <div>
-              <a href="">Mot de passe oublié&nbsp;?</a>
-            </div>
-          </div>
-          <button class="btn btn-info btn-block my-4" type="submit">Se connecter</button>
-          <p>Pas encore membre&nbsp;?&nbsp;S'inscrire 
-            <a href="index.php?action=signUp" title="Cliquez ici pour vous inscrire">ici</a>
-          </p>
-                  <p>
-                    <a href="index.php" title="retour à la page d'accueil">Retour à la page d'accueil</a>
-                  </p>
-        </form>   
-      </div>      
-    </div>  
-  </div>  
+
+<div class="background-image"></div>
+<!-- flex container -->
+<div class="d-flex h-100  text-center content">
+  <!-- login box -->
+  <div class="col-md-3 m-auto z-depth-2 ">
+    <form action="index.php?action=loginSubmit" class="my-5 mx-md-5" method="post" >
+      <div class="form-group">
+        <h2 class="font-weight-bold white-text ">Se connecter</h2>
+      </div>
+      <div class="form-group">
+      <label for="pseudo" title="Pseudo"><span class="required">*</span> Pseudo</label><br />
+      <input type="text" name="pseudo" id="pseudo" required /> 
+      </div>
+      <div class="form-group">
+      <label for="password"><span class="required">*</span> Mot de passe</label><br />
+      <input type="password" name="password" id="password" required /> 
+      </div>
+      <p id="req">
+        <span class="required">*</span>&nbsp;<span>champs obligatoires requis</span>
+      </p>     
+      <div class="form-group">
+        <a href="forgot_password.php" class="white-text">Mot de passe oublié ?</a>
+      </div>     
+      <div class="form-group">
+      <button type="submit" class="btn btn blue-gradient user" name="form_login" title="connexion"><span class="glyphicon glyphicon-user">&nbsp;</span>Se connecter</button>
+      </div>
+      <div class="row">
+      <div class="col-12">
+        <p class="text-white">Pas encore membre&nbsp;?&nbsp;cliquez<a href="index.php?action=signUp" title="Cliquez ici pour vous inscrire">  ici</a></p>
+      </div>
+       <div class="col-12">
+        <p class="gbh-c"><a type="button" class="btn-floating btn-lg blue-gradient" href="index" title="retour à la page d'accueil"><i class="fas fa-home"></i></a></p>
+       </div>    
+      </div>
+    </form>
+  </div>
 </div>
 <?php  $content = ob_get_clean (); ?>
 <?php require ('src/public/template/template_form.php'); ?>
+

@@ -1,12 +1,10 @@
 <?php $title = 'Mon Profil'; ?>
 <?php  ob_start (); ?>
 
-
 <div class="container mt-6">
-
     <div class="row">
         <div class="col-4 offset-md-4 form-div">
-            <form action="index.php?action=profile" method="post" enctype="multipart/form-data" />
+            <form action="index.php?action=updateProfile" method="post" enctype="multipart/form-data" />
             <h3 class="text-center">Création du profil</h3>
 
             <?php if(!empty($msg)): ?>

@@ -93,3 +93,17 @@ var ctxL = document.getElementById("lineChart").getContext('2d');
       }
     }
     });
+    
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "175px";
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("sideNav-perso").style.display ="none";
+      }
+      
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.getElementById("sideNav-perso").style.display ="inline-block";
+      }
+
+    
