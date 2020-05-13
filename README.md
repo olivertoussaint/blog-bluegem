@@ -1,6 +1,6 @@
 # Présentez librement un projet personnel
 
-## Blog et forum intitulé ** BlueGem** ![BlueGem Logo](./src/public/images/logo.png)
+## Blog et forum intitulé  __BlueGem__ ![BlueGem Logo](./src/public/images/earth.png)
 Format: ![Alt Text](url)
 
 ## Détail des compétences
