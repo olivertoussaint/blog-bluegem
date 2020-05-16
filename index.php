@@ -95,11 +95,11 @@ try {
 				exit;
 			}
 
-		} elseif ($_GET['action'] == 'updateNews') {			
+		} elseif ($_GET['action'] == 'updateNewsFeed') {			
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (isset($_SESSION) && ($_SESSION['role'] == '1')) {
 				$adminController = new AdminController();	
-				$adminController ->updatedNews($title, $content, $author, $category, $id); 
+				$adminController ->updatedNewsFeed($title, $content, $author, $category, $id); 
 				}  
 	        } else {
 				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
@@ -111,9 +111,9 @@ try {
 			$controller = new UserController();
 			// $controller -> newsReport();
 			
-		}  elseif ($_GET['action'] == 'deleteNews') {
+		}  elseif ($_GET['action'] == 'removeNewsFeed') {
 			$adminController = new AdminController();
-			$adminController -> removeNews($_GET['id']);// ADMIN
+			$adminController -> removeNewsFeed($_GET['id']);// ADMIN
 
 
 		} elseif ($_GET['action'] == 'deleteMember') {
