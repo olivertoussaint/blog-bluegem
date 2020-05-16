@@ -1,4 +1,4 @@
-<?php $title = "Nouvel article";?> 
+<?php $title = "Modifier l'article";?> 
 <?php ob_start(); ?>
 
 <div id="admin-page"></div>
@@ -31,4 +31,4 @@
 	</div>
 
 <?php $content = ob_get_clean(); ?>  
-<?php require('src/public/template/template_feedNews.php'); ?>
+<?php require('src/public/template/template_newsFeed.php'); ?>
