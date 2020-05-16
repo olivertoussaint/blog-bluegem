@@ -15,6 +15,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" href="./src/public/assets/css/admin.css" />
+    <!-- Ckeditor -->
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <!-- Ckfinder -->
+    <script type="text/javascript" src="./appli/ckfinder/ckfinder.js"></script>
     <title><?= $title ?></title>
 </head>
 
@@ -34,7 +38,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
-    <script type="text/javascript" src="./src/public/assets/js/admin.js"></script> 
+    <script type="text/javascript" src="./src/public/assets/js/admin.js"></script>
+    <script type="text/javascript" src="./src/public/assets/js/ckeditor.js"></script> 
       
 </body>
 </html>
