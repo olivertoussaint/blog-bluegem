@@ -10,12 +10,9 @@
   <a href="#"><i class="fas fa-blog"></i>&nbsp;Blog</a>
   <a href="#"><i class="fab fa-forumbee"></i>&nbsp;Forum</a>
   <a href="#"><i class="fas fa-sign-out-alt"></i>&nbsp;Déconnection</a>
-
 </div>
-
 <div id="main">
 <span id="sideNav-perso" onclick="openNav()">&#9776;</span>
-
 <?php endif ?>
   <!-- Main layout -->
 <main class="pt-6">
@@ -148,7 +145,7 @@
 							}
 							?></span></td>
 								<td><?= $member['date_create_account'];?></td>
-								<td class="text-center"><i class="fas fa-eraser fa-lg"></i></td>
+								<td class="text-center"><i class="fas fa-user-minus"></i></td>
 							</tr>
 							<?php
 							}
@@ -171,7 +168,7 @@
 			
 			<a href="" class="white-text mx-3">Table de gestion des articles</a>
 			<div>
-			<a href="index.php?action=createNewsFeed" class="btn-floating btn-sm-perso z-depth-4 aqua-gradient"><i class="fas fa-newspaper"></i></a>
+			<a href="index.php?action=createNewsFeed" class="btn-floating btn-sm-perso z-depth-4 aqua-gradient"><i class="fas fa-plus"></i></a>
 			</div>
 		</div>
 		<!--/Card header-->
@@ -182,7 +179,7 @@
 				<table class="table text-nowrap">
 					<thead class="black white-text">
 						<tr>
-							<th>#</th>
+							<th>#ID</th>
 							<th>Titre</th>
 							<th>Extrait de l'article</th>
 							<th>Vue</th>
@@ -209,11 +206,11 @@
 							<td><a class="btn-floating btn-lg btn-perso btn-sm" data-toggle="modal" data-target="#newsModal<?= $news['id_news'];?>"><i class="far fa-eye"></i></a>
 						</td>
 						<!-- Modal -->
-						<div class="modal fade" id="newsModal<?= $news['id_news'];?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+						<div class="modal fade" id="newsModal<?= $news['id_news'];?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel-1" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-scrollable " role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="modalLabel"><?= $news['news_title'];?></h5>
+									<h5 class="modal-title" id="modalLabel-1"><?= $news['news_title'];?></h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -230,68 +227,78 @@
 					<td><?= $news['author'];?></td>
 					<td><?= $news['creation_date_fr'];?></td>
 					<td>
-						<!-- Button to Open the Modal -->
-						<div class="btn-group">
-						<button type="button" class="btn aqua-gradient-perso"><i class="fas fa-pen-nib"></i></button>
-  <button type="button" class="dropdown-toggle btn aqua-gradient-perso waves-effect" data-toggle="dropdown" aria-haspopup="true"
-    aria-expanded="false">
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-<div class="dropdown-menu">
-    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal">
-  Modifier l'article
-</button></a>
-<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal">
-  Supprimer l'article
-</button></a>
-  </div>
-</div>
-  </td>
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+						<div class="container">
+							<a href="" class="btn-floating btn-primary" data-toggle="modal" data-target="#editNewsModal<?= $news['id_news'];?>"><i class="fas fa-user-edit"></i></a>
+							<a href="" class="btn-floating btn-secondary" data-toggle="modal" data-target="#deleteNewsmodal<?= $news['id_news'];?>"><i class="fas fa-trash"></i></a>
+						</div>
+					</td>
+					<!-- The Modal -->
+					<div class="modal fade" id="editNewsModal<?= $news['id_news'];?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel-2" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title" id="modalLabel-2"><?= $news['news_title'];?></h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        Modal body..
-      </div>
+						<!-- Modal body -->
+						<div class="modal-body">
+							<h5 class="blue-grey-text shadow-perso-1">Vous êtes sur le point de modifier l'article #ID <?= $news['id_news'];?> ! </h5>
+							publié le : <?= $news['creation_date_fr'];?>
+						</div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<a href="index.php?action=updateNewsFeed" class="btn btn aqua-gradient">Modifier</a>
+							<button type="button" class="btn btn purple-gradient" data-dismiss="modal">Annuler</button>
+						</div>
+					</div>
+				</div>
+			</div>
+					<!-- The Modal -->
+					<div class="modal" id="deleteNewsmodal<?= $news['id_news'];?>" tabindex="-1" role="dialog" aria-labelledby="modalLabel-3" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title" id="modalLabel-3"><?= $news['news_title'];?></h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
 
-    </div>
-  </div>
-</div>					
-				</tr>
+						<!-- Modal body -->
+						<div class="modal-body">
+						<h5 class="deep-purple-text shadow-perso-2">Vous êtes sur le point de supprimer l'article #ID<?=$news['id_news']?>!</h5>
+							publié le : <?= $news['creation_date_fr'];?>
+						</div>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<a href="" class="btn btn aqua-gradient">Supprimer</a>
+							<button type="button" class="btn btn purple-gradient" data-dismiss="modal">Annuler</button>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</tr>
 		<?php
 			}
 		?>
 					</tbody>
-				</table>
-				
+				</table>				
 			</div>
 		</div>
 	</div>
 
-<?php 
-  for ($i = 1; $i<=$nbPage; $i++) {
-?>
-<a href="index.php?action=admin&page=<?=$i ?>">  <?=$i?> </a>
+	    <?php 
+  			for ($i = 1; $i<=$nbPage; $i++) {
+		?>
+		<a href="index.php?action=admin&page=<?=$i ?>">  <?=$i?> </a>
 
-<?php
-   } 
-?>
-
+		<?php
+		} 
+		?>
 </div>
-
 </main>
 
 <?php  $content = ob_get_clean (); ?>
