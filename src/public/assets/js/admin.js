@@ -105,5 +105,6 @@ var ctxL = document.getElementById("lineChart").getContext('2d');
         document.getElementById("main").style.marginLeft = "0";
         document.getElementById("sideNav-perso").style.display ="inline-block";
       }
+    
 
     
