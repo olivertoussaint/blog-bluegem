@@ -39,8 +39,25 @@ class AdminController {
         require('src/view/backend/createNewsFeed.php');
     }
 
-    function removeNews() {
-        // TODO
+    function updatedNewsFeed($title, $content, $author, $category, $id) {
+        $authnewsManager = new AuthNewsManager();
+        $updatedNews = $authnewsManager -> updateFeedNews($title, $content, $author, $category, $id);
+
+        if ($updatedNews === false) {
+            throw new \Exception('Impossible de modifier le chapitre !');
+        } else {
+            header('Location: index.php?action=admin');
+            exit;
+        }
+
+    }
+
+    function removeNewsFeed($newsId) {
+        $authnewsManager = new AuthNewsManager();
+        $removedNewsFeed = $authnewsManager -> removeNewsFeed($newsId);
+        header('Location: index.php?action=admin');
+        exit;
+        
     }
 
     function removeMember($memberId) {
