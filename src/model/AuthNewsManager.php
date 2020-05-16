@@ -43,13 +43,13 @@ class AuthNewsManager extends Manager {
         return $newFeedNews; 
     }
 
-    public function deleteNews($newsId)
+    public function removeNewsFeed($newsId)
 	{
 		$db = $this->dbconnect();
         $req = $db->prepare('DELETE FROM news WHERE id = ?');
-        $deletedNews = $req->execute(array($newsId));
+        $removedNewsFeed = $req->execute(array($newsId));
 
-        return $deletedNews;
+        return $removedNewsFeed;
 	}	
 
 }
