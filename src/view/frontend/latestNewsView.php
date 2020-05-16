@@ -43,8 +43,25 @@
             <!-- Featured news -->
           </div>
                 <!-- Grid column -->
-          <div class="col-lg- col-md-12 mb-4">
-            <p>Partie à faire</p>
+          <div class="col-lg-4 col-right">
+            <div class="card mt-3">
+              <h2 class="card-header red text-white h3 font-weight-light">articles par catégorie</h2>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <div class="row mt-2">
+                    <div class="col-4 d-flex">
+                      <small class="card-text text-muted">
+                        <div class="col-8">
+                          <p class="mb-0">
+                            
+                          </p>
+                        </div>
+                      </small>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+          </div>
           </div>
 
         </div>
