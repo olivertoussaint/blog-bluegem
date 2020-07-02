@@ -42,12 +42,12 @@
                       <?php if(isset($_SESSION) && empty($_SESSION)): ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fas fa-user"></i> Compte
+                              <i class="fas fa-user"></i>&nbsp;Compte
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                                <a class="dropdown-item" href="index.php?action=signIn">Se connecter</a>
-                                <a class="dropdown-item" href="index.php?action=signUp">S'enregistrer</a>
+                                <a class="dropdown-item" href="index.php?action=signIn" title="connexion">Se connecter</a>
+                                <a class="dropdown-item" href="index.php?action=signUp" title="adhésion gratuite">S'enregistrer</a>
                             </div>
                         </li>
                       <?php endif ?>
@@ -56,13 +56,13 @@
 
                                 <li class="nav-item avatar dropdown">
                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src="src/public/avatars/default.png" class="rounded-circle z-depth-0" alt="avatar image">
-                                   </a>
+                                    aria-haspopup="true" aria-expanded="false">          
+                                    <img src="src/public/avatars/<?= $_SESSION['avatar']?>" id="avatarResize"  class="rounded-circle z-depth-0" alt="avatar image">
+                                  </a>
                                    <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
                                 <a class="dropdown-item"><?= $_SESSION['pseudo'] ?></a>
                                 <a class="dropdown-item" href="index.php?action=admin" title="Section administration"><i class="fas fa-unlock-alt"></i>&nbsp;&nbsp;Admin</a>
-                                <a class="dropdown-item" href="index.php?action=updateProfile"><i class="fas fa-user-edit"></i>&nbsp;mon profil</a>
+                                <a class="dropdown-item" href="index.php?action=updateProfile" title="Màj du profil"><i class="fas fa-user-edit"></i>&nbsp;Modifier mon profil</a>
                                 <a class="dropdown-item" href="index.php?action=logout" title="Déconnection"><i class="fas fa-sign-out-alt"></i>&nbsp;D&eacute;connexion</a>
                                    </div>
                                 </li>
@@ -72,13 +72,12 @@
                          <li class="nav-item avatar dropdown">
                           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                           <img src="src/public/avatars/default.png" class="rounded-circle z-depth-0" alt="avatar image">
+                            <img src="src/public/avatars/<?= $_SESSION['avatar']?>" id="avatarResize"  class="rounded-circle z-depth-0" alt="avatar image">
                           </a>
                           <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">    
                                 <a class="dropdown-item"><?= $_SESSION['pseudo'] ?></a>
-                                <a class="dropdown-item" href="index.php?action=admin" title="Section administration"><i class="fas fa-lock"></i>&nbsp;&nbsp;Admin</a>
-                                <a class="dropdown-item" href="index.php?action=profile">&nbsp;mon profil</a>
-                                <a class="dropdown-item" href="index.php?action=logout">D&eacute;connexion</a>
+                                <a class="dropdown-item" href="index.php?action=updateProfile"><i class="fas fa-user-edit"></i>&nbsp;Modifier mon profil</a>
+                                <a class="dropdown-item" href="index.php?action=logout" title="Déconnection"><i class="fas fa-sign-out-alt"></i>&nbsp;D&eacute;connexion</a>
                           </div>
                           </li>  
                     <?php endif ?> 

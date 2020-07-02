@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content=" BlueGem est un forum pour toutes celles et ceux qui s'interrogent sur les bouleversements que subit notre planète." />
-    <link rel="canonical" href="https://projet5.oliviertoussaint.fr">
+    <link rel="canonical" href="http://projet5.oliviertoussaint.fr">
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://projet5.oliviertoussaint.fr/" />
+    <meta property="og:url" content="http://projet5.oliviertoussaint.fr/" />
     <meta property="og:site_name" content="BlueGem" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="shortcut icon" href="./src/public/assets/ico/favicon.ico" />
@@ -24,7 +23,8 @@
 </head>
 
 <body>
-<?php require('src/public/layout/navHeader.php'); ?>
+
+    <?php require('src/public/layout/navHeader.php'); ?>
 
     <div>
         <?= $content ?>
@@ -40,7 +40,8 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
     <script type="text/javascript" src="./src/public/assets/js/main.js"></script>
-    <!-- My own Javascript -->
+    <!-- Javascript -->
+    <script type="text/javascript" src="./src/public/assets/js/api.js"></script>
     <script type="text/javascript" src="./src/public/assets/js/form.js"></script>  
     <script type="text/javascript" src="./src/public/assets/js/profile.js"></script>
 </body>

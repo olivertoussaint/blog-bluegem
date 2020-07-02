@@ -25,6 +25,10 @@ class ComposerStaticInita79b399d242b091c3803361e418ce32e
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'T' => 
+        array (
+            'TrueBV\\' => 7,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
@@ -60,6 +64,10 @@ class ComposerStaticInita79b399d242b091c3803361e418ce32e
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'TrueBV\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/true/punycode/src',
         ),
         'Symfony\\Polyfill\\Php72\\' => 
         array (

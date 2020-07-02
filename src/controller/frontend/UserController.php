@@ -21,24 +21,34 @@ class UserController {
         $newsManager = new NewsManager();
         $pagination = new Pagination();
 
-         if (!isset($_GET['page'])) {
-            $currentPage = 0;
-        } else {
-            if (isset($_GET['page']) && $_GET['page'] > 0) {
-                $currentPage = ($_GET['page'] - 1) * $newsPerPage;
-            }
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
         }
+               
         $news = $newsManager->getNews($currentPage, $newsPerPage);
         $nbNews = $pagination -> getNewsPagination();
-        $nbPage = $pagination -> getNewsPages($nbNews, $newsPerPage);
-          
+        $pages = $pagination -> getNewsPages($nbNews, $newsPerPage);
+    
         require('src/view/frontend/listNewsView.php');
     }
 
-    function latestNews() {
+    function latestNews() {   
+        $newsPerPage = 3;
         $newsManager = new NewsManager();
         $pagination = new Pagination();
-        $commentManager = new CommentManager();  
+
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
+        }
+        $news = $newsManager->getNews($currentPage, $newsPerPage);
+        $nbNews = $pagination -> getNewsPagination();
+        $pages = $pagination -> getNewsPages($nbNews, $newsPerPage);
+
+        $commentManager = new CommentManager();
         $newsFeed = $newsManager->latestNews($_GET['id']);
         $comments = $commentManager->getComments($_GET['id']);
         $nbComments = $commentManager->countNumberComments($_GET['id']);
@@ -77,63 +87,64 @@ class UserController {
 		require('src/view/frontend/signInView.php');
     }
     
-    function updateProfile($profileImageName) {   
-	   if (isset($_POST['save-user'])){
+    function updateProfile() {   
+        $msg = "";
+        $css_class ="";
+
+	   if (isset($_POST['save_profile'])){
 		echo"<pre>", print_r($_FILES['profileImage']['name']), "</pre>";
-        // $bio = $_POST['bio'];
-        // $bio = htmlspecialchars($_POST['bio']);
-	    $profileImageName = time() . '_' . $_FILES['profileImage']['name'];
-		$avatar_path = "src/public/avatars/".$_SESSION['pseudo'].".". $profileImageName;
 
-	    if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $avatar_path)) {
-		$msg = "Image téléchargée !";
+        $profileImageName = $_SESSION['id'].'_'.time() . '_' . $_FILES['profileImage']['name'];
+        $target_dir = "src/public/avatars/";
+        $target_file = $target_dir . basename($profileImageName) ;
+        
+
+	    if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $target_file)) {
+            $accountManager = new AccountManager();
+            $accountManager ->updateAvatar($profileImageName);
+            $_SESSION['avatar'] = $profileImageName;
+		$msg = "Image téléchargée et insérée dans la base de données !";
         $css_class = "alert-success";
-
-		} else {
-            $msg = "erreur durant le téléchargement";
-            $css_class = "alert-danger";
-        }
+    } else {
+        $msg ="erreur durant le téléchargement";
+        $css_class = "alert-danger";
+    }
+    }
+    else{
+        $accountManager = new AccountManager();
+        $member = $accountManager ->checkPseudo($_SESSION['pseudo']);
+        
     }
     require('src/view/frontend/profile.php');
 }    
     
+    function addMember($pseudo, $password, $email) {
 
-	function addMember($pseudo, $password, $email) {
+        $pseudo = htmlspecialchars($_POST['pseudo']);
+		$email = htmlspecialchars($_POST['email']);
+        $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+        
         $accountManager = new AccountManager();
-        if(isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] == 'http/projet5') {
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if(isset($_POST['reason']) && empty($_POST['reason'])){
-                if(
-                    isset($_POST['pseudo']) && !empty($_POST['pseudo']) &&
-                    isset($_POST['email']) && !empty($_POST['email']) &&
-                    isset($_POST['password']) && !empty($_POST['password'])
+        $request = $accountManager -> controlSignUp($pseudo,$email);
 
-                ){ 
-                    $pseudo = htmlspecialchars($_POST['pseudo']);
-		            $email = htmlspecialchars($_POST['email']);
-                    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
-                    echo "Inscription de {$pseudo} effectuée !";
+        $result = $request->fetch();
 
-                    $accountManager = new AccountManager();
-                    $request = $accountManager -> controlSignUp($pseudo,$email);
+        // If pseudo or email  already exist do an execption
+        if($result['pseudo'] === $pseudo || $result['email'] === $email)
+        {
+            throw new \Exception('le pseudo ou le mail sont déjà utilisés.');
 
-                    $result = $request->fetch();
+        } 
 
-                    // If pseudo or email  already exist do an execption
-                    if($result['pseudo'] === $pseudo || $result['email'] === $email)
-                    {
-                        throw new \Exception('le pseudo ou le mail sont déjà utilisés.');
-                    }
-                }
-            } else { 
-                http_response_code(405);
-                echo 'Méthode non autorisée';
-                $accountManager = new AccountManager();
-                $result = $accountManager->createMember($pseudo, $email,$password);
+        else {
+            $accountManager = new AccountManager();
+            $result = $accountManager->createMember($pseudo, $email,$password);
             }
-        }
+            
+            header('Location: index?action=signIn');
+            exit();
     }
-}
+
     
     function loginSubmit($pseudo, $password) {
         $accountManager = new AccountManager();
@@ -141,15 +152,17 @@ class UserController {
         $isPasswordCorrect = password_verify($_POST['password'], $logMember['password']);
 
         if (!$logMember) {
-
-            header('Location: index.php');;
+        
+            header('Location: index.php');
             exit;
 
         } else {
+
          if ($isPasswordCorrect) {
             $_SESSION['id'] = $logMember['id'];
             $_SESSION['pseudo'] = ucfirst(strtolower($pseudo));
             $_SESSION['role'] = $logMember['role'];
+            $_SESSION['avatar'] = $logMember['avatar'];
 
             header('Location: index?action=listNews');
               exit;
@@ -173,7 +186,7 @@ class UserController {
     function newsReport($newsId) {
         $commentManager = new CommentManager();
         $reportedComment = $commentManager->reporting($newsId);
-        header('Location: latestNews.php');
+        header('Location: index.php?action=latestNews&id='. $newsId);
         exit;
     }
 
@@ -182,6 +195,11 @@ class UserController {
         $commentManager->countNumberComments($_GET['id']);
 
         require('src/view/frontend/latestNews.php');
+    }
+
+    function newsPerTopic () {
+        $newsManager = new NewsManager();
+        
     }
 
     function mailTo() {

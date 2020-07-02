@@ -1,9 +1,3 @@
 body,html { height: 100%; }
-
-div#editor {
-  width: 81%;
-  margin: auto;
-  text-align: left;
-}
-
+div#editor {  width: 81%; margin: auto; text-align: left; }
 .ss { background-color: red; }

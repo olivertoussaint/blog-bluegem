@@ -39,7 +39,7 @@
             <div class="form-group">
               <button type="submit" class="btn btn blue-gradient user" name="submit" title="s'inscrire"><span class="glyphicon glyphicon-user">&nbsp;</span>S'inscrire</button>
             </div>
-            <input type="hidden" name="reason" id="">
+            
             <div class="row">
               <div class="col-12">
                 <p class="text-white">Déjà membre&nbsp;?&nbsp;cliquez<a href="index.php?action=signIn" title="Cliquez ici pour vous inscrire">  ici</a></p>

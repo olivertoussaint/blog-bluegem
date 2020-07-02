@@ -33,7 +33,8 @@
                 <label for="message">Votre message</label>
               </div>
               <div class="center-on-small-only">
-                <a class="btn btn aqua-gradient btn-perso" onclick="validateForm()">Envoyer</a>
+                <a class="btn btn aqua-gradient btn-perso-1" onclick="validateForm()">Envoyer</a>
+                <a href="index.php?action=listNews" class="btn btn purple-gradient btn-perso-2">Annuler</a>
               </div> 
               <div class="status" id="status"></div>
             </div>

@@ -5,7 +5,7 @@ require 'vendor/autoload.php';
 
 use Projet\controller\backend\AdminController;
 use Projet\controller\frontend\UserController;
-
+use Projet\model\NewsManager;
 
 try {
 	if (isset($_GET['action']))	{
@@ -21,7 +21,6 @@ try {
 			else {
 				throw new Exception('Aucun identifiant de news envoyé');
 			}
-		
 		} elseif ($_GET['action'] == 'addMember') {
 			if (!empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
 
@@ -42,8 +41,6 @@ try {
 	}
 
 		} elseif ($_GET['action'] == 'updateProfile') {
-			// $msg = "";
-            // $css_class = "";
 			$controller = new UserController();
 			$controller -> updateProfile($_SESSION['id']);
 			
@@ -74,7 +71,7 @@ try {
 		
 		} elseif ($_GET['action'] == 'reporting') {
 			$controller = new UserController();
-			$controller -> newsReport($_GET['id'], $_SESSION['pseudo']);
+			$controller -> newsReport($_GET['id'], $_GET['id_news'], $_SESSION['pseudo']);
 
 		} elseif ($_GET['action'] == 'admin') {
 			if (isset($_SESSION['pseudo']) && ($_SESSION['role'] == '1')) {
@@ -95,23 +92,31 @@ try {
 				exit;
 			}
 
-		} elseif ($_GET['action'] == 'updateNewsFeed') {			
+		} elseif ($_GET['action'] == 'newsFeedUpdate'){	
+			if (isset($_GET['id'])&&($_GET['id'] > 0)) {
+				$newsManager = new NewsManager();
+				$newsManager -> updateNewsFeed($_POST['news_title'], $_POST['mytextarea'],$_GET['id']);
+			}
+
+		} elseif ($_GET['action'] == 'editNewsFeed') {			
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (isset($_SESSION) && ($_SESSION['role'] == '1')) {
 				$adminController = new AdminController();	
-				$adminController ->updatedNewsFeed($title, $content, $author, $category, $id); 
+				$adminController ->displayUpdate(); 
 				}  
 	        } else {
 				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
-				header("Location: index.php");
-				exit;
 			}
 
 		} elseif ($_GET['action'] == 'validateComment') {
-			$controller = new UserController();
-			// $controller -> newsReport();
+			$adminController = new AdminController();
+			$adminController -> approveComment($_GET['id'], $_SESSION['pseudo']);//ADMIN
 			
-		}  elseif ($_GET['action'] == 'removeNewsFeed') {
+		}  elseif ($_GET['action'] == 'deleteComment') {
+			$adminController = new AdminController();
+			$adminController -> removeComment($_GET['id']);//ADMIN	
+		
+		}	elseif ($_GET['action'] == 'removeNewsFeed') {
 			$adminController = new AdminController();
 			$adminController -> removeNewsFeed($_GET['id']);// ADMIN
 

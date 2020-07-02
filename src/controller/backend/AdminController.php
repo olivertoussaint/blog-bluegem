@@ -20,18 +20,23 @@ class AdminController {
         $members = $accountManager->getMembers();
         $pagination = new Pagination();        
         
-        if (!isset($_GET['page'])) {
-            $currentPage = 0;
-        } else {
-            if (isset($_GET['page']) && $_GET['page'] > 0) {
-                $currentPage = ($_GET['page'] - 1) * $newsPerPage;
-            }
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
         }
+
         $news = $authnewsManager->getNews($currentPage, $newsPerPage);
         $nbNews = $pagination -> getNewsPagination();
-        $nbPage = $pagination -> getNewsPages($nbNews, $newsPerPage);
+        $pages = $pagination -> getNewsPages($nbNews, $newsPerPage);
 
         require('src/view/backend/dashboardView.php');
+    }
+
+    function displayUpdate() {
+        $authnewsManager = new AuthNewsManager();
+        $news = $authnewsManager->getFeedNews($_GET['id']);
+        require('src/view/backend/editNewsFeed.php');
     }
 
     function createNewsFeed() {
@@ -39,11 +44,11 @@ class AdminController {
         require('src/view/backend/createNewsFeed.php');
     }
 
-    function updatedNewsFeed($title, $content, $author, $category, $id) {
+    function editedNewsFeed($title, $content, $author, $category, $id) {
         $authnewsManager = new AuthNewsManager();
-        $updatedNews = $authnewsManager -> updateFeedNews($title, $content, $author, $category, $id);
+        $editedNewsFeed = $authnewsManager -> editNewsFeed($title, $content, $author, $category, $id);
 
-        if ($updatedNews === false) {
+        if ($editedNewsFeed === false) {
             throw new \Exception('Impossible de modifier le chapitre !');
         } else {
             header('Location: index.php?action=admin');
@@ -55,17 +60,36 @@ class AdminController {
     function removeNewsFeed($newsId) {
         $authnewsManager = new AuthNewsManager();
         $removedNewsFeed = $authnewsManager -> removeNewsFeed($newsId);
+
         header('Location: index.php?action=admin');
         exit;
         
     }
 
+    function removeComment($commentId) {
+        $commentManager = new CommentManager();
+        $deletedComment = $commentManager->deleteComment($commentId);
+
+        header('Location: index.php?action=admin&delete-comment=success');
+		 exit;
+        
+    }
+
+    function approveComment($newsId) {
+        $commentManager = new CommentManager();
+        $approvedComment = $commentManager -> validatecomment($newsId);
+        
+        header('Location: index.php?action=admin&approve-comment=success');
+		 exit;
+
+    }
+
     function removeMember($memberId) {
-        $accountManager = new accountManager();
+        $authnewsManager = new AuthNewsmanager();   
+        $deletedMember = $authnewsManager -> deleteMember($memberId);
     
-        $deletedMember = $accountManager -> deleteMember($memberId);
-    
-        Header('Location: index.php?action=admin&remove-member=success');	
+        header('Location: index.php?action=admin&remove-member=success');
+        exit;	
     }
 
    

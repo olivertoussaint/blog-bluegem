@@ -25,6 +25,10 @@ function validateForm() {
 
 }
 
+$('.carousel').carousel({
+	interval: 3000
+})
+
 
 
 
