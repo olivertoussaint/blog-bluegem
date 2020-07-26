@@ -59,15 +59,24 @@ class AccountManager extends Manager {
         $db         = $this->dbConnect();
         $displayAvatar = $db->prepare('SELECT id, avatar FROM members WHERE id = ? ');
         $displayAvatar  -> execute(array($avatar));
+        
         return $displayAvatar;
     }
 
-    function updateAvatar($profileImageName){
+    function updateAvatar($profileImageName) {
         $db               = $this->dbConnect();
         $updatedProfile   = $db->prepare("UPDATE members SET avatar = ?  WHERE id = ?");
         $updatedProfile   = $updatedProfile->execute(array($profileImageName,$_SESSION['id']));
 
         return $updatedProfile;
+    }
+
+    function editPassword($hashedPassword) {
+        $db               = $this->dbConnect();
+        $stmt             = $db->prepare("UPDATE members SET password = ? WHERE email = ?");
+        $editedPassword   = $stmt->execute(array($hashedPassword, $_POST['email']));
+
+        return $editedPassword;
     }
     
     function getMembers() 
