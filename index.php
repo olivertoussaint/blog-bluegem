@@ -48,7 +48,7 @@ try {
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (isset($_SESSION['id']) && !empty($_POST['comment'])) {
 					$controller = new UserController();
-					$controller ->addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
+					$controller -> addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
 
 				} else {
 					throw new Exception('Tous les champs doivent être remplis !');
@@ -56,6 +56,19 @@ try {
 				} else {
 				  throw new Exception('Aucun identifiant de billet envoyé');
 		}  
+
+		} elseif ($_GET['action'] == 'addTopicComment') {
+			if (isset($_GET['id']) && $_GET['id'] > 0) {
+				if (isset($_SESSION['id']) && !empty($_POST['comment'])) {
+			$controller = new UserController();
+			$controller -> addTopicComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
+
+				} else {
+					throw new Exception('Tous les champs doivent être remplis !');
+				}
+			} else {
+				throw new Exception('Aucun identifiant de topic envoyé');
+			}
 
 		} elseif ($_GET['action'] == 'loginSubmit') {
 			$controller = new UserController();
@@ -69,19 +82,42 @@ try {
 			$controller = new UserController();
 			$controller -> signUp();
 		
+		} elseif ($_GET['action'] == 'forgot_password') {
+			$controller = new UserController();
+			$controller -> forgot_password();
+		
 		} elseif ($_GET['action'] == 'reporting') {
 			$controller = new UserController();
 			$controller -> newsReport($_GET['id'], $_GET['id_news'], $_SESSION['pseudo']);
 
-		} elseif ($_GET['action'] == 'admin') {
-			if (isset($_SESSION['pseudo']) && ($_SESSION['role'] == '1')) {
-				$adminController = new AdminController();
-				$adminController -> admin();
-			}else{
-				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
-                header("Location: index.php");
-                exit;            
-			}
+		} elseif ($_GET['action'] == 'forgot_password') {
+			$controller = new UserController();
+			$controller -> forgot_password();
+		
+		} elseif ($_GET['action'] == 'forum') {
+			$controller = new UserController();
+			$controller -> getForum();			
+			
+		} elseif ($_GET['action'] == 'sujet') {
+			$controller = new UserController();
+			$controller -> getSujet($_GET['id']);
+
+		} elseif ($_GET['action'] == 'topic') {
+			$controller = new UserController();
+			$controller -> getTopic($_GET['id']);
+
+		} elseif ($_GET['action'] == 'newTopic') {
+			$controller = new UserController();
+			$controller -> getNewTopic();
+		if (isset($_GET['id']) && $_GET['id'] > 0) {
+			if (isset($_SESSION['id']) && !empty($_POST['content'])) {
+			} else {
+				throw new Exception('Votre sujet ne peux pas dépasser 70 caractères');
+				}
+			} else {
+			  throw new Exception('Veuillez remplir tous les champs');
+	}  	
+	
 		} elseif ($_GET['action'] == 'createNewsFeed') {
 			if (isset($_SESSION['pseudo']) && ($_SESSION['role'] == '1')) {
 				$adminController = new AdminController();
@@ -119,7 +155,6 @@ try {
 		}	elseif ($_GET['action'] == 'removeNewsFeed') {
 			$adminController = new AdminController();
 			$adminController -> removeNewsFeed($_GET['id']);// ADMIN
-
 
 		} elseif ($_GET['action'] == 'deleteMember') {
 			$adminController = new AdminController();
