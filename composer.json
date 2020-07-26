@@ -5,7 +5,8 @@
         "phpunit/phpunit": "^8.5",
         "tinymce/tinymce": "^5.3",
         "swiftmailer/swiftmailer": "^6.2",
-        "true/punycode": "^2.1"
+        "true/punycode": "^2.1",
+        "fxp/composer-asset-plugin": "^1.4"
         
     },
     "autoload": {
