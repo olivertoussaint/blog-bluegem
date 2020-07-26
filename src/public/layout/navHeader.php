@@ -25,18 +25,10 @@
                                 <a class="dropdown-item" href="index.php?action=listNews">Toute l'actu</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-33" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Forum
-                            </a>
-                            <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-33">
-                                <a class="dropdown-item" href="#">Réchauffement climatique</a>
-                                <a class="dropdown-item" href="#">Santé</a>
-                                <a class="dropdown-item" href="#">Activité humaine</a>
-                                <a class="dropdown-item" href="#">Spiritualité/Astrologie</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.php?action=forum">Tous les forums</a>
-                            </div>
+                        <li class="nav-item">
+                           <a class="nav-link" href="index.php?action=forum">Le forum</a>
                         </li>
+                        
                     </ul>
                     <ul class="navbar-nav ml-auto">
                       <?php if(isset($_SESSION) && empty($_SESSION)): ?>
