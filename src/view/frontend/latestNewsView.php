@@ -122,12 +122,15 @@
             </div>
           </section>
         </div>
-
         <div class="container mt-5">
           <!--Section: Content-->
-          <section class="team-section text-center dark-text">
+          <section class="team-section dark-text">
             <?php $nbComment = $nbComments->fetch();?>
-            <span class="badge badge-info"><span class="badge badge-success"><?= htmlspecialchars($nbComment['numberOfComments']) ?></span>&nbsp; Commentaire<?php if ($nbComment['numberOfComments'] > 1) echo 's';?></span>
+            <div class="col-md-8">
+            <div class="text-center">
+              <span class="badge badge-info"><span class="badge badge-success"><?= htmlspecialchars($nbComment['numberOfComments']) ?></span>&nbsp; Commentaire<?php if ($nbComment['numberOfComments'] > 1) echo 's';?></span>
+            </div>
+            </div>
             <!-- Grid row -->
             <div class="row">
               <p class="text-center tc">
@@ -147,23 +150,20 @@
         ?>
 
           <div class="container">
+            <div class="col-md-8">
             <hr />
             <p class="comment-user">
               <img class="rounded-circle z-depth-2" id="avatarResize" src="src/public/avatars/<?= htmlspecialchars($comment['avatar'])?>" alt="<?= htmlspecialchars($comment['avatar']) ?>">
-              <strong><?= htmlspecialchars($comment['pseudo']) ?></strong>
-            </p>
-            <p class="comment-date">
+              <strong class="text-shad"><?= htmlspecialchars($comment['pseudo']) ?></strong>
               a écrit le : <?= $comment['comment_date_fr'] ?><br />
             </p>
-            <div class="comment-area">
               <p class="comment-comment">
                 <?= nl2br(htmlspecialchars($comment['comment'])) ?>
               </p>&nbsp;&nbsp;
-              <a href="index.php?action=reporting&id=<?= $comment['id_comment'] ?>" class="flag"><span class="badge badge-secondary">Signaler un abus</span></a>
-            </div>
+              <a href="index.php?action=reporting&id=<?= $comment['id_comment'] ?>" class="flag"><span class="badge badge-secondary">Signaler un abus</span></a>           
             <hr />
           </div>
-
+        </div>
     <?php 
         }
     ?>
@@ -171,10 +171,10 @@
     <?php if(!empty($_SESSION))
         { 
           $id = $_GET['id'];
-
     ?>
-         
+          
           <div class="form-group mt-4 green-border-focus">
+            <div class="col-md-8">
             <form action="index.php?action=addComment&amp;id=<?php echo $id ?>" method="post">
             <div class="form-group">
               <label class="direction" for="avatar">
@@ -182,9 +182,10 @@
                 <strong><?= $_SESSION['pseudo'] ?></strong></label>
                 <textarea class="form-control" name="comment" placeholder="Votre commentaire..."></textarea>
             </div>
-              <button type="submit" class="btn blue-gradient user" name="form_comment" title="ajout de commentaire(s)"><i class="far fa-comment-dots"></i>&nbsp;&nbsp;Publier</button>
+          </div>
+              <button type="submit" class="btn blue-gradient pstion" name="form_comment" title="ajout de commentaire(s)"><i class="far fa-comment-dots"></i>&nbsp;&nbsp;Publier</button>
             </form>
-
+            
             <?php
             }
             ?>
