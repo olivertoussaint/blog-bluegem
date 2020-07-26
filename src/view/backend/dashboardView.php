@@ -23,7 +23,7 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fas fa-compress-arrows-alt"></i></a>
 		<?php if(isset($_SESSION) && !empty($_SESSION) && ($_SESSION['role'] == '1')) : ?>
 		<a href="/index"><img class="logo-content" src="./src/public/images/logo.png" alt="logo BlueGem" /><span class="colored-logo">BlueGem</span></a>
-		<a href="index.php?action=updateProfile" title="Mon pseudo"><?= $_SESSION['pseudo'] ?></a>
+		<a href="index.php?action=updateProfile" title="Màj du profil"><img src="src/public/avatars/<?= $_SESSION['avatar']?>" id="avatarResize"  class="rounded-circle z-depth-0" alt="avatar image"><?= $_SESSION['pseudo'] ?></a>
 		<a href="/index" title="Retour à l'accueil"><i class="fas fa-home"></i>&nbsp;Accueil</a>
 		<a href="index.php?action=listNews" title="Retour au blog"><i class="fas fa-blog"></i>&nbsp;Blog</a>
 		<a href="#" title="Retour au forum"><i class="fab fa-forumbee"></i>&nbsp;Forum</a>
