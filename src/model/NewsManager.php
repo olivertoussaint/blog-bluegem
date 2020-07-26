@@ -53,16 +53,66 @@ class NewsManager extends Manager {
         return $deletedNews;
     }
 
-    public function DisplayNewsFeed()
+    public function displayNewsFeed()
     {
         $db                  = $this->dbConnect();
         $req                 = $db->prepare('SELECT news.id_news, news.news_title, news.news_content, news.author, news.news_image, news.id_category, DATE_FORMAT(news.publication_date, \'%d/%m/%Y à %Hh%imin%ss\') AS news_date_fr, categories.category_content FROM news INNER JOIN categories ON news.id_category = categories.id ORDER BY news.id_category ASC');
         $req                 ->execute(array());
         $displayNewsFeed     = $req->fetch();
         
-        return $displayNewsFeed;
+        return $displayNewsFeed;    
+    }
+    
+    // public function getCategories()
+    // {
+    //     $db                  = $this->dbConnect();
+    //     $categories          = $db->query('SELECT * FROM f_categories ORDER BY name');
 
+    //     return $categories;
+    // }
+
+    // public function getSubCategories()
+    // {
+    //     $db                  = $this->dbConnect();
+    //     $subCategories       = $db->prepare('SELECT * FROM f_subCategories WHERE id_category = ? ORDER BY name');
+      
+    //     return $subCategories;
+    // }
+
+    public function getCategories()
+    {
+        $db                  = $this->dbConnect();
+        $categories          = $db->query ('SELECT * FROM forum ORDER BY agencement');
+
+        return $categories;
+    }
+
+    public function getSubjects($id)
+    {
+        $db                  = $this->dbConnect();
+        $subjects            = $db->prepare("SELECT *,DATE_FORMAT(creation_date, 'Le %d/%m/%Y à %H\h%i') as date_c FROM f_topics WHERE id_forum = ? ORDER BY creation_date DESC");
+        $subjects            ->execute(array($id));
         
-    } 
+        return $subjects;
+    }
+
+    public function getTopic($id)
+    {
+        $db                  = $this->dbConnect();
+        $topic              = $db->prepare("SELECT *, DATE_FORMAT(creation_date,'Le %d/%m/%Y à %H\h%i') as date_c FROM f_topics WHERE id = ?");
+        $topic              ->execute(array($id));
+        $topic              = $topic->fetch();
+
+        return $topic;
+    }
+
+    public function getANewTopic($about,$content)
+    {
+        $db                  = $this->dbConnect();
+        $newTopic            = $db->prepare('INSERT INTO f_topics (about, content, creator_notif, creation_date) VALUES(?,?,?,NOW())');
+        $newTopic            ->execute(array($about,$content));
+
+        return $newTopic;
+    }
 
 }
