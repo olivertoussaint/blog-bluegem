@@ -22,7 +22,7 @@
         <span class="required">*</span>&nbsp;<span>champs obligatoires requis</span>
       </p>     
       <div class="form-group">
-        <a href="forgot_password.php" class="white-text">Mot de passe oublié ?</a>
+        <a href="index.php?action=forgot_password" class="text-secondary">Mot de passe oublié ?</a>
       </div>     
       <div class="form-group">
         <button type="submit" class="btn btn blue-gradient user" name="form_login" title="connexion"><span class="glyphicon glyphicon-user">&nbsp;</span>Se connecter</button>
