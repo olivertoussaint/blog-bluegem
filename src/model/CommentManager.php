@@ -18,6 +18,15 @@ class CommentManager extends Manager
         return $req;
     }
 
+    public function getTopicComment($id)
+    {
+        $db    = $this->dbConnect();
+        $req   = $db->prepare('SELECT * FROM topic_comment, DATE_FORMAT(t_date,\'%d/%m/%Y à %H\h%i\') as date_c');
+        $req   ->execute(array($id));
+
+        return $req;
+    }
+
     public function validatecomment($newsId)
     {
         $db                = $this->dbconnect();
@@ -83,6 +92,7 @@ class CommentManager extends Manager
         $nbrComments   = $db->prepare('SELECT COUNT(*) AS numberOfComments FROM comments WHERE id_news = ?');
         $nbrComments   ->execute(array( $newsId ));
         
+        // echo json_encode($nbrComments);
         return $nbrComments;        
     } 
 } 
