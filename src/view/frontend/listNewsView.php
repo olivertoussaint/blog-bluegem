@@ -8,7 +8,9 @@
           <p class="text-center mx-auto w-responsive mb-5 p-shadow-5 px-2 py-4 rounded mb-0 background-c fzr">Bienvenu(e) sur <span class="colored-logo">BlueGem</span>, le site d'actualités qui s'interroge sur l'évolution de la biodiversité sur notre belle planète bleue.
             Retrouvez-y toute l'actualité au travers d'une Revue de presse, d'une rubrique A la une et de News. Rejoignez notre communauté et participez aux forums !
           </p>
-          <div id="map"></div>
+          <h1>API</h1>
+          
+          <div id="airMap"></div>
           <!-- Section description -->  
           <h2 class="font-weight-bold  mt-3 mb-4 pb-2">Derniers Articles</h2>
           <!-- Grid row -->
@@ -61,7 +63,8 @@
         </h6>
   
         <!-- Post data -->
-        <p>par&nbsp;<a class="font-weight-bold"><?=($data['pseudo'])?></a>,&nbsp;le&nbsp;<?=($data['creation_date_fr'])?></p>
+        <!-- <p>par&nbsp;<a class="font-weight-bold"><?=($data['pseudo'])?></a>,&nbsp;le&nbsp;<?=($data['creation_date_fr'])?></p> -->
+        <p>Mise en ligne le &nbsp;<?=($data['creation_date_fr'])?>&nbsp;&nbsp;&nbsp;<a class="font-weight-bold">par&nbsp;&nbsp;<?=($data['pseudo'])?></a></p>
         <!-- Excerpt -->
         <p class="dark-grey-text text-center z-depth-3 py-4 px-4 background-c">
 
