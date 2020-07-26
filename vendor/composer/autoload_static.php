@@ -42,6 +42,10 @@ class ComposerStaticInita79b399d242b091c3803361e418ce32e
             'Prophecy\\' => 9,
             'Projet\\' => 7,
         ),
+        'F' => 
+        array (
+            'Fxp\\Composer\\AssetPlugin\\' => 25,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -96,6 +100,10 @@ class ComposerStaticInita79b399d242b091c3803361e418ce32e
         'Projet\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Fxp\\Composer\\AssetPlugin\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fxp/composer-asset-plugin',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
