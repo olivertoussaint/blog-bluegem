@@ -35,7 +35,7 @@ class UserController {
     }
 
     function latestNews() {   
-        $newsPerPage = 3;
+        $newsPerPage = 4;
         $newsManager = new NewsManager();
         $pagination = new Pagination();
 
@@ -92,31 +92,29 @@ class UserController {
         $css_class ="";
 
 	   if (isset($_POST['save_profile'])){
-		echo"<pre>", print_r($_FILES['profileImage']['name']), "</pre>";
-
-        $profileImageName = $_SESSION['id'].'_'.time() . '_' . $_FILES['profileImage']['name'];
-        $target_dir = "src/public/avatars/";
-        $target_file = $target_dir . basename($profileImageName) ;
+            $profileImageName = $_SESSION['id'].'_'.time() . '_' . $_FILES['profileImage']['name'];
+            $target_dir = "src/public/avatars/";
+            $target_file = $target_dir . basename($profileImageName) ;
         
 
 	    if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $target_file)) {
             $accountManager = new AccountManager();
             $accountManager ->updateAvatar($profileImageName);
             $_SESSION['avatar'] = $profileImageName;
-		$msg = "Image téléchargée et insérée dans la base de données !";
-        $css_class = "alert-success";
-    } else {
-        $msg ="erreur durant le téléchargement";
-        $css_class = "alert-danger";
-    }
+
+		    $msg = "Image téléchargée et insérée dans la base de données !";
+            $css_class = "alert-success";
+        } else {
+            $msg ="erreur durant le téléchargement";
+            $css_class = "alert-danger";
+        }
     }
     else{
         $accountManager = new AccountManager();
-        $member = $accountManager ->checkPseudo($_SESSION['pseudo']);
-        
+        $member = $accountManager ->checkPseudo($_SESSION['pseudo']);      
     }
     require('src/view/frontend/profile.php');
-}    
+    }    
     
     function addMember($pseudo, $password, $email) {
 
@@ -132,8 +130,7 @@ class UserController {
         // If pseudo or email  already exist do an execption
         if($result['pseudo'] === $pseudo || $result['email'] === $email)
         {
-            throw new \Exception('le pseudo ou le mail sont déjà utilisés.');
-
+            throw new \Exception('le pseudo et/ou le mail sont déjà utilisés.');
         } 
 
         else {
@@ -176,6 +173,78 @@ class UserController {
 
     }
 
+    function forgot_password() {
+        if(isset($_POST['email'])) {
+            $password = uniqid();
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $message = "Bonjour, voici votre nouveau mot de passe : $password";
+            $headers ='Content-Type: text/plain; charset="utf-8"'." ";
+
+            if(mail($_POST['email'],'Mot de passe oublié', $message,$headers))
+            {
+                $accountManager = new AccountManager();
+                $editedPassword = $accountManager->editPassword($hashedPassword);
+                echo "Mail envoyé";
+            } else {
+                echo "Une erreur est survenue...";
+            }
+        }
+
+        require('src/view/frontend/forgot_password.php');
+    }
+
+    function getForum() {  
+        $newsManager = new NewsManager();
+        $categories = $newsManager->getCategories();
+        // $subCategories =$newsManager->getSubCategories();
+        require('src/view/frontend/forumView.php');
+    }
+
+    function getSujet($id) {
+        $newsManager = new NewsManager();
+        $subjects = $newsManager->getSubjects($id);
+        require('src/view/frontend/sujetView.php');
+    }
+
+    function getTopic($id) {
+        $newsManager = new NewsManager();
+        $topic = $newsManager->getTopic($id);
+        require('src/view/frontend/topicView.php'); 
+    }
+
+    function getNewTopic() {
+        if(isset($_SESSION['pseudo'])) {
+        if(isset($_POST['tsubmit'])) {
+            if(isset($_POST['tsubject'],$_POST['tcontent'])) {              
+                $about   = htmlspecialchars($_POST['tsubject']);
+                $content = htmlspecialchars($_POST['tcontent']);
+
+                if (!empty($about) AND !empty($content)) {
+                    $newsManager = new NewsManager();
+                    $newTopic = $newsManager->getANewTopic($about,$content);
+
+                if(strlen($about) <=70) {
+                if(isset($_POST['tmail'])) {
+                   $mail_notif = 1;
+                } else {
+                    $mail_notif = 0;
+                }
+            } else {
+                $terror = "Votre sujet ne peut pas dépasser 70 caractères";
+            }
+        } else {
+            $terror = "Veuillez complétez tous les champs";
+        }
+        }
+    }
+} else {
+    $terror = "Veuillez vous connecter pour poster un nouveau topic";
+}
+        require('src/view/frontend/newTopicView.php');
+
+    }
+
 	function logout() {
         session_start();
         session_destroy();
@@ -188,6 +257,19 @@ class UserController {
         $reportedComment = $commentManager->reporting($newsId);
         header('Location: index.php?action=latestNews&id='. $newsId);
         exit;
+    }
+
+    function addTopicComment($id,$pseudo,$content) {
+        $commentManager = new CommentManager();
+        $topicComment = $commentManager->getTopicComment($id,$pseudo,$content);
+        if ($topicComment === false) {
+            throw new \Exception('Impossible d\'ajouter le commentaire !');
+        } else {
+            
+            header('Location: index.php?action=topicView&id=' . $id);
+             exit;
+        }
+        
     }
 
     function countNewsComments() {
