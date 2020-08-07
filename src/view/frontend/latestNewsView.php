@@ -52,9 +52,7 @@
             <h2 class="card-header red text-white h3 font-weight-light">Les derniers fils d'actualités</h2>
             
             <?php
-              while ($data = $news->fetch()) 
-              {
-            ?>
+              while ($data = $news->fetch()) { ?>
  
             <!-- Small news -->
             <div class="single-news mb-3 p">
@@ -133,8 +131,8 @@
             </div>
             <!-- Grid row -->
             <div class="row">
-              <p class="text-center tc">
-                <?php if ($nbComment['numberOfComments'] === 0) echo "Aucun commantaire de publié... Soyez le ou la \" First One \" <span>&#128513;</span>";?>
+              <p class="noCmmt">
+                <?php if ($nbComment['numberOfComments'] == 0) echo "Aucun commantaire de publié... Soyez le ou la \" First One \" <span>&#128513;</span>";?>
               </p>
             </div>
             <!-- Grid row -->

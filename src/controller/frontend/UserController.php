@@ -23,7 +23,7 @@ class UserController {
 
         if(isset($_GET['page']) && !empty($_GET['page'])){
             $currentPage = (int) strip_tags($_GET['page']);
-        }else{
+        } else {
             $currentPage = 1;
         }
                
@@ -41,7 +41,7 @@ class UserController {
 
         if(isset($_GET['page']) && !empty($_GET['page'])){
             $currentPage = (int) strip_tags($_GET['page']);
-        }else{
+        } else {
             $currentPage = 1;
         }
         $news = $newsManager->getNews($currentPage, $newsPerPage);
@@ -54,13 +54,11 @@ class UserController {
         $nbComments = $commentManager->countNumberComments($_GET['id']);
 
         if (!empty($newsFeed)) {
-
         require('src/view/frontend/latestNewsView.php');
 
         } else {
-            
-           header('Location: index.php'); 
-           exit;
+            header('Location: index.php'); 
+            exit;
         }
     }
 
@@ -70,16 +68,13 @@ class UserController {
         if ($displayComments === false) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         } else {
-            
             header('Location: index.php?action=latestNews&id=' . $newsId);
-             exit;
+            exit;
         }
-        
         require('src/view/frontend/latestNewsView.php');
     }
 	
     function signUp() {
-
 		require('src/view/frontend/signUpView.php');
 	}
 
@@ -108,8 +103,7 @@ class UserController {
             $msg ="erreur durant le téléchargement";
             $css_class = "alert-danger";
         }
-    }
-    else{
+    } else {
         $accountManager = new AccountManager();
         $member = $accountManager ->checkPseudo($_SESSION['pseudo']);      
     }
@@ -117,7 +111,6 @@ class UserController {
     }    
     
     function addMember($pseudo, $password, $email) {
-
         $pseudo = htmlspecialchars($_POST['pseudo']);
 		$email = htmlspecialchars($_POST['email']);
         $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
@@ -131,13 +124,10 @@ class UserController {
         if($result['pseudo'] === $pseudo || $result['email'] === $email)
         {
             throw new \Exception('le pseudo et/ou le mail sont déjà utilisés.');
-        } 
-
-        else {
+        } else {
             $accountManager = new AccountManager();
             $result = $accountManager->createMember($pseudo, $email,$password);
             }
-            
             header('Location: index?action=signIn');
             exit();
     }
@@ -149,12 +139,10 @@ class UserController {
         $isPasswordCorrect = password_verify($_POST['password'], $logMember['password']);
 
         if (!$logMember) {
-        
             header('Location: index.php');
             exit;
 
         } else {
-
          if ($isPasswordCorrect) {
             $_SESSION['id'] = $logMember['id'];
             $_SESSION['pseudo'] = ucfirst(strtolower($pseudo));
@@ -165,7 +153,6 @@ class UserController {
               exit;
 
         } else {
-
             header('Location: index.php');
              exit;
         }
@@ -195,54 +182,61 @@ class UserController {
     }
 
     function getForum() {  
-        $newsManager = new NewsManager();
-        $categories = $newsManager->getCategories();
-        // $subCategories =$newsManager->getSubCategories();
-        require('src/view/frontend/forumView.php');
+            $newsManager = new NewsManager();
+            $categories = $newsManager->getCategories();
+            $subCategories = $newsManager->getSubCategories();
+            require('src/view/frontend/forumView.php');
     }
 
-    function getSujet($id) {
-        $newsManager = new NewsManager();
-        $subjects = $newsManager->getSubjects($id);
-        require('src/view/frontend/sujetView.php');
-    }
+    // function getSujet($id) {
+    //     $newsManager = new NewsManager();
+    //     $subjects = $newsManager->getSubjects($id);
+    //     require('src/view/frontend/sujetView.php');
+    // }
 
-    function getTopic($id) {
+    function getTopic() {
         $newsManager = new NewsManager();
-        $topic = $newsManager->getTopic($id);
+        $topics = $newsManager->getTopic();
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getTopicComments();
         require('src/view/frontend/topicView.php'); 
     }
 
+    function newTopicForm() {
+        require ('src/view/frontend/newTopicView.php');
+    }
+
     function getNewTopic() {
-        if(isset($_SESSION['pseudo'])) {
-        if(isset($_POST['tsubmit'])) {
-            if(isset($_POST['tsubject'],$_POST['tcontent'])) {              
-                $about   = htmlspecialchars($_POST['tsubject']);
-                $content = htmlspecialchars($_POST['tcontent']);
+        $terror = "";
+        // die(var_dump($sujet,$contenu,$notif_mail));
+        if(isset($_SESSION['id'])) {
+            if(isset($_POST['tsubmit'])) {
+                if(isset($_POST['tsujet'],$_POST['tcontenu'])) {
+                    $sujet = htmlspecialchars($_POST['tsujet']);
+                    $contenu = htmlspecialchars($_POST['tcontenu']);
+                    
+                    if (!empty($sujet) AND !empty($contenu)) {
+                        if(strlen($sujet) <=70) {
+                            if(isset($_POST['tmail'])) {
+                                $mail_notif = 1;
+                            } else {
+                                $mail_notif = 0;
+                            }
 
-                if (!empty($about) AND !empty($content)) {
-                    $newsManager = new NewsManager();
-                    $newTopic = $newsManager->getANewTopic($about,$content);
-
-                if(strlen($about) <=70) {
-                if(isset($_POST['tmail'])) {
-                   $mail_notif = 1;
-                } else {
-                    $mail_notif = 0;
+                            $newsManager = new NewsManager();
+                            $newTopic = $newsManager->getANewTopic($sujet,$contenu,$mail_notif);
+                        } else {
+                            $terror = "Votre sujet ne peut pas dépasser 70 caractères";
+                        }
+                    } else {
+                        $terror = "Veuillez complétez tous les champs";
+                    }
                 }
-            } else {
-                $terror = "Votre sujet ne peut pas dépasser 70 caractères";
             }
         } else {
-            $terror = "Veuillez complétez tous les champs";
+            $terror = "Veuillez vous connecter pour poster un nouveau topic";
         }
-        }
-    }
-} else {
-    $terror = "Veuillez vous connecter pour poster un nouveau topic";
-}
-        require('src/view/frontend/newTopicView.php');
-
+        header('Location: index.php');
     }
 
 	function logout() {
@@ -259,23 +253,28 @@ class UserController {
         exit;
     }
 
-    function addTopicComment($id,$pseudo,$content) {
+    function topicComments($topicId) {
         $commentManager = new CommentManager();
-        $topicComment = $commentManager->getTopicComment($id,$pseudo,$content);
-        if ($topicComment === false) {
-            throw new \Exception('Impossible d\'ajouter le commentaire !');
-        } else {
+        $comments = $commentManager->getTopicComments($topicId);
+        require('src/view/frontend/topicView.php');
+    } 
+
+    // function addTopicComment($id,$pseudo,$content) {
+    //     $commentManager = new CommentManager();
+    //     $topicComment = $commentManager->getTopicComments($id,$pseudo,$content);
+    //     if ($topicComment === false) {
+    //         throw new \Exception('Impossible d\'ajouter le commentaire !');
+    //     } else {
             
-            header('Location: index.php?action=topicView&id=' . $id);
-             exit;
-        }
+    //         header('Location: index.php?action=topicView&id=' . $id);
+    //          exit;
+    //     }
         
-    }
+    // }
 
     function countNewsComments() {
         $commentManager = new CommentManager();
         $commentManager->countNumberComments($_GET['id']);
-
         require('src/view/frontend/latestNews.php');
     }
 

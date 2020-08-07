@@ -1,6 +1,6 @@
 # Présentez librement un projet personnel
 
-## Blog et forum __BlueGem__ <img height="60" src="./src/public/images/logo.png" alt="logo BlueGem" />
+## Blog et forum __BlueGem__ 
 
 ## Détail des compétences
 Dans ce projet final, l’objectif est de démontrer que vous avez assimilé toutes les compétences vues dans les projets précédents de ce parcours. **Vous devrez attester de votre degré d’autonomie dans l’organisation de votre travail et les choix techniques.**

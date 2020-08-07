@@ -3,7 +3,7 @@
   <div class="container text-center text-md-left">
     <div class="row">
       <div class="col-md-6 mt-md-0 mt-3">
-        <h5 class="mt-3"> <a href="/index.php"><img class="logo-content"src="./src/public/images/logo.png" alt="logo BlueGem" /><span class="colored-logo">BlueGem</span></a></h5>
+        <h5 class="mt-3"> <a href="/index.php"><img class="logo-content" src="./src/public/images/logo.png" alt="logo BlueGem" /><span class="colored-logo">BlueGem</span></a></h5>
         Site d'informations et d'échanges autour de l'évolution de la biodiversité sur notre Belle Bleue.
         <p>
             <span class="r-perso">Retrouvez toute l'actualité concernant l'évolution climatique et de ses conséquences ponctuelles sur notre belle planète bleue au travers d'une&nbsp;&nbsp;-&nbsp;<a href="/article/news">Revue de presse</a>&nbsp;-&nbsp;&nbsp;d'une rubrique &nbsp;-&nbsp;<a href="/article/test">&nbsp;A la une&nbsp;</a>&nbsp;-&nbsp;&nbsp;et de &nbsp;-&nbsp;<a href="/article/preview">News</a>&nbsp;-&nbsp;Rejoignez notre communauté et participez aux <a href="/">forums</a> !

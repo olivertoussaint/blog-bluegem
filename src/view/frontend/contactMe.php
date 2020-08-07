@@ -1,7 +1,7 @@
 <?php  $title = 'Me contacter' ; ?> 
 <?php  ob_start (); ?>
 
-<div class="container z-depth-5 my-5 px-0">
+<div class="container z-depth-5 mgt7 mb-5 px-0">
   <!--Section: Content-->
   <section class="my-md-5 background">
     <div class="rgba-black-light rounded p-5">

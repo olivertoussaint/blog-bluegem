@@ -63,26 +63,20 @@ class NewsManager extends Manager {
         return $displayNewsFeed;    
     }
     
-    // public function getCategories()
-    // {
-    //     $db                  = $this->dbConnect();
-    //     $categories          = $db->query('SELECT * FROM f_categories ORDER BY name');
 
-    //     return $categories;
-    // }
+    public function getSubCategories()
+    {
+        $db                  = $this->dbConnect();
+        $subCategories       = $db->prepare('SELECT * FROM f_subCategories WHERE id_category = ? ORDER BY name');
+        // $subCategories       ->execute(array());
 
-    // public function getSubCategories()
-    // {
-    //     $db                  = $this->dbConnect();
-    //     $subCategories       = $db->prepare('SELECT * FROM f_subCategories WHERE id_category = ? ORDER BY name');
-      
-    //     return $subCategories;
-    // }
+        return $subCategories;
+    }
 
     public function getCategories()
     {
         $db                  = $this->dbConnect();
-        $categories          = $db->query ('SELECT * FROM forum ORDER BY agencement');
+        $categories          = $db->query ('SELECT * FROM f_categories ORDER BY name');
 
         return $categories;
     }
@@ -96,22 +90,32 @@ class NewsManager extends Manager {
         return $subjects;
     }
 
-    public function getTopic($id)
+    public function getTopic()
     {
+        
         $db                  = $this->dbConnect();
-        $topic              = $db->prepare("SELECT *, DATE_FORMAT(creation_date,'Le %d/%m/%Y à %H\h%i') as date_c FROM f_topics WHERE id = ?");
-        $topic              ->execute(array($id));
-        $topic              = $topic->fetch();
+        // $topics              = $db->prepare("SELECT id, id_forum, title, content, DATE_FORMAT(creation_date,'Le %d/%m/%Y à %H\h%i') as date_c, id_user FROM f_topics WHERE id = ?");
+        // $topics               ->execute(array());
+        $topics              = $db->query("SELECT *,DATE_FORMAT(creation_date, 'Le %d/%m/%Y à %H\h%i') as date_c FROM f_topics ORDER BY id DESC");
+        // $topics              = $topics->fetch();
+        // $req = "SELECT * FROM f_topics LEFT JOIN f_topics_category ON f_topics.id = f_topics_category.id_topic LEFT JOIN f_categories ON f_topics_category.id_category = f_categories.id LEFT JOIN f_subcategories ON f_topics_category.id_subcategory = f_subcategories.id WHERE f_categories.id = ?";
+        // $topics = $db->prepare($req);
 
-        return $topic;
+        return $topics;
     }
 
-    public function getANewTopic($about,$content)
+    public function getANewTopic($sujet,$contenu,$notif_mail)
     {
+        try{
         $db                  = $this->dbConnect();
-        $newTopic            = $db->prepare('INSERT INTO f_topics (about, content, creator_notif, creation_date) VALUES(?,?,?,NOW())');
-        $newTopic            ->execute(array($about,$content));
-
+        $newTopic            = $db->prepare('INSERT INTO f_topics (id_creator, title, content, creator_notif, creation_date) VALUES(?,?,?,?,NOW())');
+        $newTopic            ->execute(array($_SESSION['id'],$sujet,$contenu,$notif_mail));
+        }
+        catch (\Exception $e) 
+{
+    die('Erreur : '.$e->getMessage());
+    
+}
         return $newTopic;
     }
 

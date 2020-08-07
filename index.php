@@ -17,51 +17,47 @@ try {
 			if (isset($_GET['id']) && $_GET['id'] > 0 && is_numeric($_GET['id'])) {
 				$controller = new UserController();
 				$controller -> latestNews();
-			}
-			else {
+			} else {
 				throw new Exception('Aucun identifiant de news envoyé');
 			}
+
 		} elseif ($_GET['action'] == 'addMember') {
 			if (!empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['passwordConfirm'])) {
-
 				if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-						if ($_POST['password'] == $_POST['passwordConfirm']) {
-					
-					$controller = new UserController();
-					$controller -> addMember(strip_tags($_POST['pseudo']), strip_tags($_POST['password']), strip_tags($_POST['email']));
+					if ($_POST['password'] == $_POST['passwordConfirm']) {
+						$controller = new UserController();
+						$controller -> addMember(strip_tags($_POST['pseudo']), strip_tags($_POST['password']), strip_tags($_POST['email']));
+				} else {
+					throw new Exception('Les deux mots de passe ne correspondent pas.');
 				}
-				else {
-						throw new Exception('Les deux mots de passe ne correspondent pas.');
-				}
+			} else {
+				throw new Exception('Pas d\'adresse email valide.');
+			}
 		} else {
-				  throw new Exception('Pas d\'adresse email valide.');
+			throw new Exception('Tous les champs ne sont pas remplis !');
 		}
-	} else {
-			  throw new Exception('Tous les champs ne sont pas remplis !');
-	}
 
 		} elseif ($_GET['action'] == 'updateProfile') {
-			$controller = new UserController();
-			$controller -> updateProfile($_SESSION['id']);
-			
+		$controller = new UserController();
+		$controller -> updateProfile($_SESSION['id']);
+
 		} elseif ($_GET['action'] == 'addComment') {
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (isset($_SESSION['id']) && !empty($_POST['comment'])) {
 					$controller = new UserController();
 					$controller -> addComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
-
 				} else {
 					throw new Exception('Tous les champs doivent être remplis !');
-					}
+				}
 				} else {
 				  throw new Exception('Aucun identifiant de billet envoyé');
-		}  
+				}  
 
 		} elseif ($_GET['action'] == 'addTopicComment') {
 			if (isset($_GET['id']) && $_GET['id'] > 0) {
 				if (isset($_SESSION['id']) && !empty($_POST['comment'])) {
 			$controller = new UserController();
-			$controller -> addTopicComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
+			// $controller -> addTopicComment($_GET['id'], $_SESSION['id'], $_POST['comment']);
 
 				} else {
 					throw new Exception('Tous les champs doivent être remplis !');
@@ -90,34 +86,54 @@ try {
 			$controller = new UserController();
 			$controller -> newsReport($_GET['id'], $_GET['id_news'], $_SESSION['pseudo']);
 
+		} elseif ($_GET['action'] == 'topic_comment') {
+			$controller = new UserController();
+			$controller -> topicComments($_GET['id_topic']);
+
 		} elseif ($_GET['action'] == 'forgot_password') {
 			$controller = new UserController();
 			$controller -> forgot_password();
 		
 		} elseif ($_GET['action'] == 'forum') {
 			$controller = new UserController();
-			$controller -> getForum();			
+			$controller -> getForum();		
 			
 		} elseif ($_GET['action'] == 'sujet') {
 			$controller = new UserController();
-			$controller -> getSujet($_GET['id']);
+			// $controller -> getSujet($_GET['id']);
 
 		} elseif ($_GET['action'] == 'topic') {
-			$controller = new UserController();
-			$controller -> getTopic($_GET['id']);
+			// if (isset($_GET['id']) && $_GET['id'] > 0 && is_numeric($_GET['id'])) {
+				$controller = new UserController();
+				$controller -> getTopic();
+			// }
+			// else {
+			// 	throw new Exception('Aucun identifiant de topic envoyé');
+			// }
+
+		} elseif ($_GET['action'] == 'newTopicForm'){
+			if (isset($_SESSION['id'])) {
+				$controller = new UserController();
+				$controller -> newTopicForm();
+			}
+
 
 		} elseif ($_GET['action'] == 'newTopic') {
+			if (isset($_SESSION['id'])) {
 			$controller = new UserController();
+			// $sujet = $_POST['tsujet'];
+			// $contenu = $_POST['tcontenu'];
+			// $notif_mail = $_POST['tmail'];
+
 			$controller -> getNewTopic();
-		if (isset($_GET['id']) && $_GET['id'] > 0) {
-			if (isset($_SESSION['id']) && !empty($_POST['content'])) {
 			} else {
-				throw new Exception('Votre sujet ne peux pas dépasser 70 caractères');
-				}
-			} else {
-			  throw new Exception('Veuillez remplir tous les champs');
-	}  	
-	
+				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+			}
+
+		} elseif ($_GET['action'] == 'admin') {
+			$adminController = new AdminController();
+			$adminController -> admin();
+
 		} elseif ($_GET['action'] == 'createNewsFeed') {
 			if (isset($_SESSION['pseudo']) && ($_SESSION['role'] == '1')) {
 				$adminController = new AdminController();
@@ -176,8 +192,7 @@ try {
 			$controller = new UserController();
 			$controller -> contactMe();
 		}
-	} else 
-	{
+	} else {
 		$controller = new Usercontroller;
 		$controller -> index();
 	}

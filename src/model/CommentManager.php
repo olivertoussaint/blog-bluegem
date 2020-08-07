@@ -18,12 +18,13 @@ class CommentManager extends Manager
         return $req;
     }
 
-    public function getTopicComment($id)
+    public function getTopicComments()
     {
         $db    = $this->dbConnect();
-        $req   = $db->prepare('SELECT * FROM topic_comment, DATE_FORMAT(t_date,\'%d/%m/%Y à %H\h%i\') as date_c');
-        $req   ->execute(array($id));
-
+        $req   = $db->prepare('SELECT topic_comment.id,topic_comment.id_topic,topic_comment.id_user,topic_comment.content,topic_comment.t_date, members.pseudo  FROM topic_comment INNER JOIN members ON topic_comment.id_user = members.id WHERE id_topic = ? ORDER BY topic_comment.t_date DESC');
+        // $req   ->execute(array());
+        // $topic_comment     = $req->fetchAll();
+        
         return $req;
     }
 
@@ -92,7 +93,6 @@ class CommentManager extends Manager
         $nbrComments   = $db->prepare('SELECT COUNT(*) AS numberOfComments FROM comments WHERE id_news = ?');
         $nbrComments   ->execute(array( $newsId ));
         
-        // echo json_encode($nbrComments);
         return $nbrComments;        
     } 
 } 
