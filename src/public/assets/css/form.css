@@ -91,3 +91,12 @@ a.btn-perso-2 {
   height: 227px; 
   width: 500px; 
 }
+@media only screen and (max-width: 768px) {
+
+  .mgt7 {
+    margin-top: 0;
+  }
+  #map {
+    width: 377px;
+  }
+}
