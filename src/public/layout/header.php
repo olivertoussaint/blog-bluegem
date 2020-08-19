@@ -19,7 +19,7 @@
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actualité
                             </a>
                             <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-3">
-                                <a class="dropdown-item" href="index.php?action=signIn">Réchauffement climatique</a>
+                                <a class="dropdown-item" href="index.php?action=listNews&id=2">Réchauffement climatique</a>
                                 <a class="dropdown-item" href="index.php?action=signIn">Santé</a>
                                 <a class="dropdown-item" href="index.php?action=signIn">Activité humaine</a>
                                 <a class="dropdown-item" href="index.php?action=signIn">Spiritualité/Astrologie</a>
