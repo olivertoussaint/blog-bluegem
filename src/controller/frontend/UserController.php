@@ -82,6 +82,10 @@ class UserController {
 		require('src/view/frontend/signInView.php');
     }
     
+    function weather() {
+        require('src/view/frontend/apiView.php');
+    } 
+       
     function updateProfile() {   
         $msg = "";
         $css_class ="";
@@ -188,15 +192,14 @@ class UserController {
             require('src/view/frontend/forumView.php');
     }
 
-    // function getSujet($id) {
-    //     $newsManager = new NewsManager();
-    //     $subjects = $newsManager->getSubjects($id);
-    //     require('src/view/frontend/sujetView.php');
-    // }
-
     function getTopic() {
         $newsManager = new NewsManager();
         $topics = $newsManager->getTopic();
+
+        if(isset($_GET['categorie']) AND !empty($_GET['categorie'])) {
+            $get_category = htmlspecialchars($_GET['categorie']);
+        }
+
         $commentManager = new CommentManager();
         $comments = $commentManager->getTopicComments();
         require('src/view/frontend/topicView.php'); 
@@ -209,7 +212,7 @@ class UserController {
     function getNewTopic() {
         $terror = "";
         // die(var_dump($sujet,$contenu,$notif_mail));
-        if(isset($_SESSION['id'])) {
+        if(isset($_SESSION['id'])AND !empty($_SESSION)) {
             if(isset($_POST['tsubmit'])) {
                 if(isset($_POST['tsujet'],$_POST['tcontenu'])) {
                     $sujet = htmlspecialchars($_POST['tsujet']);
