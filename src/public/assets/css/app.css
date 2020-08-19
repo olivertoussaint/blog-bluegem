@@ -22,21 +22,18 @@ body {
   background-color: rgba(174, 137, 47, 0.7) !important; 
 }
 .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover { 
-  background-color: rgb(65, 188, 225); color: aquamarine !important; 
+  /* background-color: rgb(65, 188, 225); color: aquamarine !important;  */
   color: aquamarine !important; 
   border-radius: 10px; 
 }
-a.navbar-brand >img.logo-content { 
+/* a.navbar-brand >img.logo-content { 
   width: 50px; 
-}
+} */
 img.logo-content { 
   width: 50px; 
 }
 .navbar-brand { 
   font-size: 10px; 
-}
-.navbar { 
-  background-color: transparent; 
 }
 ul.text-pos { 
   text-align-last: center; 
@@ -46,7 +43,6 @@ ul.text-pos {
   height: 50px;
   margin: 0px auto; 
 }
-
 span.colored-logo {
   font-family: "danielregular";
   color: aquamarine;
