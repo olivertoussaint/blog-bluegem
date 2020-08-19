@@ -36,23 +36,23 @@
             <?php switch ($c['id']) {
                 case 1:
                   echo '<h5 class="card-header orange darken-3 text-uppercase text-white pt-3 shadow-title-1">
-                        <i class="fab fa-gripfire fa-lg"></i>réchauffement climatique</h5>';
+                        <i class="fab fa-gripfire fa-lg"></i>&emsp;réchauffement climatique</h5>';
                   break;
                 case 2:
                   echo '<h5 class="card-header brown darken-2 text-uppercase text-white pt-3 shadow-title-2">
-                        <i class="fas fa-radiation-alt"></i>activité humaine</h5>';
+                        <i class="fas fa-radiation-alt"></i>&emsp;activité humaine</h5>';
                   break;
                 case 3:
                   echo '<h5 class="card-header green darken-3 text-uppercase text-white pt-3 shadow-title-2">
-                        <i class="fas fa-ankh"></i>spiritualité / astrologie</h5>';
+                        <i class="fas fa-ankh"></i>&emsp;spiritualité / astrologie</h5>';
                   break;
                 case 4:
                   echo '<h5 class="card-header cyan accent-3 text-uppercase text-white pt-3 shadow-title-2">
-                        <i class="fas fa-globe"></i>autres sujets</h5>';
+                        <i class="fas fa-globe"></i>&emsp;autres sujets</h5>';
                   break;
                 default:
                   echo '<h5 class="card-header white accent-3 text-uppercase text-white pt-3 shadow-title-2">
-                        <i class="fas fa-question"></i>&nbsp;hors cat&eacutegorie</h5>';
+                        <i class="fas fa-question"></i>&emsp;hors cat&eacutegorie</h5>';
               }
             ?>
 
