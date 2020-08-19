@@ -1,118 +1,48 @@
-    // fetch('http://api.airvisual.com/v2/nearest_city?key=a66bcd5d-667c-423e-9d14-612e478bcd80')
-    // .then(response => response.json())
-    // .then(info => {
-    //   console.log(info);
-    //   console.log("ville: "+info.data.city);
-    //   console.log("pr:" +info.data.current.weather.pr );
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // });
+const APIKEY ='e46b7a1358ab1c19a97c196e31bffa4e';
 
-    var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-      
-      fetch("http://api.airvisual.com/v2/city_ranking?key=a66bcd5d-667c-423e-9d14-612e478bcd80", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+let apiCall = function(city){
+	let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKEY}&units=metric&lang=fr`;
 
+	function capitalize(str){
+		return str[0].toUpperCase() + str.slice(1);
+	}
+	
+	fetch(url).then(response => 
+	response.json().then(data => {
+		let temp = Math.round(data.main.temp)
+		let wind = Math.round(data.wind.speed*3.6)
+		let pressure = data.main.pressure
 
-    
-    // On initialise la latitude et la longitude de Paris (centre de la carte)
-    var lat = 48.852969;
-    var lon = 2.349903;
-    var macarte = null;
+		const dt = data.dt
+		const sunrise = data.sys.sunrise
+		const sunset = data.sys.sunset
 
-    var markerClusters; // Servira à stocker les groupes de marqueurs
-    // Nous initialisons une liste de marqueurs
-      var villes = {
-          "Goussainville": {"lat": 49.030467, "lon": 2.471236},
-          "Marseille": {"lat": 43.296482, "lon": 5.369780},
-          "Lyon": {"lat": 45.764043, "lon":4.835659},
-          "Grenoble": {"lat": 45.188529, "lon": 5.724524},
-          "New York": {"lat": 40.712784, "lon": -74.005941},
-          "Los Angeles": {"lat": 34.052234, "lon": -118.243685},
-          "Berlin": {"lat": 52.520007, "lon": 13.404954},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-        //   "": {"lat": , "lon":},
-          "Paris": { "lat": 48.852969, "lon": 2.349903 },
-          "Brest": { "lat": 48.383, "lon": -4.500 },
-          "Quimper": { "lat": 48.000, "lon": -4.100 },
-          "Bayonne": { "lat": 43.500, "lon": -1.467 }
-          
-      };
+		let ssd = new Date(sunset*1000)
+		let srd = new Date(sunrise*1000)
+	
+		document.querySelector('#icon').innerHTML = "<img src=\"http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png\" >";
+		document.querySelector('#description').innerHTML = capitalize(data.weather[0].description);
+		document.querySelector('#city').innerHTML = "<img src=\"src/public/icons/picto-location" +".png\">" + data.name +'<br>'+ data.sys.country;
+		document.querySelector('#temp').innerHTML = "<img src=\"src/public/icons/thermometer-measurement" +".png\">" + `${temp}` + '°C';
+		document.querySelector('#humidity').innerHTML = "<img src=\"src/public/icons/moist-icon" +".png\">" + data.main.humidity + '%';
+		document.querySelector('#wind').innerHTML = "<img src=\"src/public/icons/silhouette" +".png\">" + `${wind}`+'&nbsp;' + 'km/h';
+		document.querySelector('#sunset').innerHTML = "<img src=\"src/public/icons/sun" +".png\">"+'&nbsp;'+"lev&eacute;e du soleil"+'<br>' + srd.getHours()+':' + srd.getMinutes();
+		document.querySelector('#sunrise').innerHTML = "<img src=\"src/public/icons/sun" +".png\">"+'&nbsp;'+"coucher du soleil"+'<br>' + ssd.getHours()+':' +ssd.getMinutes();
+		document.querySelector('#pressure').innerHTML = "barom&ecirc;tre"+'<br>' + `${pressure}`+','+0+0+'&nbsp;'+'hPa';
+		document.body.className = data.weather[0].main.toLowerCase();
+	})
+	)
 
-    function initMap() {
-    
-    var iconBase = './src/public/icons/m3.png';
-    macarte = L.map('airMap').setView([lat, lon], 2);
-    markerClusters = L.markerClusterGroup();
+	.catch(function() {
+		// catch any errors
+	});
+}
 
-    var mainLayer =  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-        minZoom: 2,
-        maxZoom: 15
-    }).addTo(macarte);
-
-    var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {           
-     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-     minZoom: 2,
-     maxZoom: 15
-    })
-
-    L.control.layers({
-     'Esri': mainLayer,
-     'OpenStreet': OpenStreetMap_Mapnik,          
-    },{
-     // TODO
-    }).addTo(macarte)
-
-    L.Control.Watermark = L.Control.extend({
-        onAdd: function() {
-            var img = L.DomUtil.create('img');
-
-        img.src = './src/public/images/logo.png';
-        img.style.width = '75px';
-
-        return img;
-    },
-
-    onRemove: function() {
-        // Nothing to do here
-    }
+	document.querySelector('form').addEventListener('submit', function(e) {
+	e.preventDefault();
+	let city = document.querySelector('#inputCity').value;
+	apiCall(city);
 });
 
-L.control.watermark = function(opts) {
-    return new L.Control.Watermark(opts);
-}
+apiCall('goussainville');
 
-L.control.watermark({ position: 'bottomleft' }).addTo(macarte);
-
- 
-    // Nous parcourons la liste des villes
-    for (ville in villes) {
-        var myIcon = L.icon({
-            iconUrl: iconBase,
-            iconSize: [50, 50],
-            iconAnchor: [25, 50],
-            popupAnchor: [-3, -76],
-        });
-        var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon }); // pas de addTo(macarte), l'affichage sera géré par la bibliothèque des clusters
-        marker.bindPopup(ville);
-        markerClusters.addLayer(marker); // Nous ajoutons le marqueur aux groupes
-    }
-    macarte.addLayer(markerClusters);
-}
-
-window.onload = function(){
-initMap(); 
-}; 
