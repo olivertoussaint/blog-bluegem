@@ -94,28 +94,19 @@ class NewsManager extends Manager {
     {
         
         $db                  = $this->dbConnect();
-        // $topics              = $db->prepare("SELECT id, id_forum, title, content, DATE_FORMAT(creation_date,'Le %d/%m/%Y à %H\h%i') as date_c, id_user FROM f_topics WHERE id = ?");
-        // $topics               ->execute(array());
-        $topics              = $db->query("SELECT *,DATE_FORMAT(creation_date, 'Le %d/%m/%Y à %H\h%i') as date_c FROM f_topics ORDER BY id DESC");
-        // $topics              = $topics->fetch();
-        // $req = "SELECT * FROM f_topics LEFT JOIN f_topics_category ON f_topics.id = f_topics_category.id_topic LEFT JOIN f_categories ON f_topics_category.id_category = f_categories.id LEFT JOIN f_subcategories ON f_topics_category.id_subcategory = f_subcategories.id WHERE f_categories.id = ?";
-        // $topics = $db->prepare($req);
+        $req = "SELECT * FROM f_topics LEFT JOIN f_topics_category ON f_topics.id = f_topics_category.id_topic LEFT JOIN f_categories ON f_topics_category.id_category = f_categories.id LEFT JOIN f_subcategories ON f_topics_category.id_subcategory = f_subcategories.id WHERE f_categories.id = ?";
+    
+        $topics = $db->prepare($req);
 
         return $topics;
     }
 
     public function getANewTopic($sujet,$contenu,$notif_mail)
     {
-        try{
         $db                  = $this->dbConnect();
         $newTopic            = $db->prepare('INSERT INTO f_topics (id_creator, title, content, creator_notif, creation_date) VALUES(?,?,?,?,NOW())');
         $newTopic            ->execute(array($_SESSION['id'],$sujet,$contenu,$notif_mail));
-        }
-        catch (\Exception $e) 
-{
-    die('Erreur : '.$e->getMessage());
-    
-}
+        
         return $newTopic;
     }
 
