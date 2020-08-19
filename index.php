@@ -93,42 +93,29 @@ try {
 		} elseif ($_GET['action'] == 'forgot_password') {
 			$controller = new UserController();
 			$controller -> forgot_password();
-		
+			
+		}elseif ($_GET['action'] == 'weather_api') {
+			$controller = new Usercontroller();
+			$controller -> weather();
+			
 		} elseif ($_GET['action'] == 'forum') {
 			$controller = new UserController();
 			$controller -> getForum();		
-			
-		} elseif ($_GET['action'] == 'sujet') {
-			$controller = new UserController();
-			// $controller -> getSujet($_GET['id']);
 
 		} elseif ($_GET['action'] == 'topic') {
-			// if (isset($_GET['id']) && $_GET['id'] > 0 && is_numeric($_GET['id'])) {
+			
 				$controller = new UserController();
 				$controller -> getTopic();
-			// }
-			// else {
-			// 	throw new Exception('Aucun identifiant de topic envoyé');
-			// }
+
 
 		} elseif ($_GET['action'] == 'newTopicForm'){
-			if (isset($_SESSION['id'])) {
+			
 				$controller = new UserController();
 				$controller -> newTopicForm();
-			}
-
-
+	
 		} elseif ($_GET['action'] == 'newTopic') {
-			if (isset($_SESSION['id'])) {
 			$controller = new UserController();
-			// $sujet = $_POST['tsujet'];
-			// $contenu = $_POST['tcontenu'];
-			// $notif_mail = $_POST['tmail'];
-
 			$controller -> getNewTopic();
-			} else {
-				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
-			}
 
 		} elseif ($_GET['action'] == 'admin') {
 			$adminController = new AdminController();
