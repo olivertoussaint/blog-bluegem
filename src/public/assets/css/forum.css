@@ -26,7 +26,7 @@ a.navbar-brand >img.logo-content {
     background-color: rgba(47, 174, 156, 0.82) !important; 
 }
 .nav-link:hover { 
-    background-color: rgb(65, 188, 225); 
+    /* background-color: rgb(65, 188, 225);  */
     color: aquamarine !important; 
 }
 .dropdown-menu { 
@@ -96,7 +96,7 @@ select {
 }
 .f-title { 
     position: absolute; 
-    top: 15px; 
+    top: 126px; 
     left: 45%; 
 }
 .main { 
@@ -182,13 +182,14 @@ h5.card-header {
     padding: 0;
     background-color: rgba(95, 158, 160, 0.219);   
 }
-input[type=text].for--search {
+.for--search input[type=text]{
     margin: 0;
     width: 100%;
     outline: none;
     padding: 15px 10px;
     display: inline-block;
     border: 0;
+    color: beige;
     background: #aeb9b934 !important;
     border-bottom: 2px solid aquamarine;
     box-sizing: border-box;
@@ -234,8 +235,42 @@ input[type=text].for--search {
     margin-right: 250px;
     margin-bottom: -0.5rem;
 }
+.col-6 {
+    padding: 0;
+}
+.form-group {
+    background-color: azure;
+}
+p input[type=text] {
+    width: 100%;
+    padding: 5px;
+    color: grey;
+    border: none;
+}
 
-@media only screen and (max-width: 768px) {
-    
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 25px;
+    }
+    .f-title {
+        position: absolute;
+        top: 139px;
+        left: 45%;
+    }
+    .col-6 {
+        max-width: 100%;
+    }
+    h5 {
+        font-size: 15px;
+    }
+    .resize-error { 
+        font-size: 0.60em; 
+        position: relative;
+        margin-left: 0; 
+    }
+    .perso-hr { 
+        margin-right: 151px; 
+    } 
 }
 
