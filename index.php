@@ -93,29 +93,31 @@ try {
 		} elseif ($_GET['action'] == 'forgot_password') {
 			$controller = new UserController();
 			$controller -> forgot_password();
-			
-		}elseif ($_GET['action'] == 'weather_api') {
+		
+		} elseif ($_GET['action'] == 'weather_api') {
 			$controller = new Usercontroller();
-			$controller -> weather();
-			
-		} elseif ($_GET['action'] == 'forum') {
+			$controller -> weather();			
+		}
+		elseif ($_GET['action'] == 'forums') {
 			$controller = new UserController();
 			$controller -> getForum();		
 
-		} elseif ($_GET['action'] == 'topic') {
-			
+		} elseif ($_GET['action'] == 'topics') {
 				$controller = new UserController();
-				$controller -> getTopic();
-
+				$controller -> getTopics();
 
 		} elseif ($_GET['action'] == 'newTopicForm'){
-			
 				$controller = new UserController();
 				$controller -> newTopicForm();
-	
+			
 		} elseif ($_GET['action'] == 'newTopic') {
+			if (isset($_SESSION['id'])) {
 			$controller = new UserController();
 			$controller -> getNewTopic();
+			} else {
+				throw new Exception('Vous devez vous connecter');
+			}
+			
 
 		} elseif ($_GET['action'] == 'admin') {
 			$adminController = new AdminController();

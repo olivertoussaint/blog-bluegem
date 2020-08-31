@@ -11,17 +11,18 @@
               <form action="" method="post">
                 <div class="for--search">
                   <input type="text" name="search" placeholder="Rechercher un topic...">
-                  <button class="search-btn" title="cliquez pour la recherche">
+                  <!-- <button class="search-btn" title="cliquez pour la recherche">
                     <i class="fas fa-search"></i>
-                  </button>
+                  </button> -->
+                  <input type="image" class="search-btn" src="../../src/public/icons/svg/search.svg">
                 </div>
               </form>
             </div>
           </div>
         </div>
         
-        <h2 class="h3 font-weight-light text-center mt-3">Tous les forums</h2>
-        <div class="container white my-4 py-4 shadow-lg shadow-border ">
+        <h1 class="font-weight-light text-center mt-3 fs-title">Tous les forums</h1>
+        <div class="container  cyan lighten-3 my-4 py-4 shadow-lg shadow-border ">
           <div class="card mt-3 mb-3">
 
             <?php while ($c = $categories->fetch())  { 

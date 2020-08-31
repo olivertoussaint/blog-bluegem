@@ -4,7 +4,7 @@
       <div class="container z-depth-5 mgt7 mb-5 px-0">
         <section class="my-md-5 background">
           <div class="rgba-black-light rounded p-5">
-            <h3 class="text-center font-weight-bold text-white mt-3 mb-5">Contactez moi</h3>
+            <h1 class="text-center font-weight-bold text-white mt-3 mb-5">Contactez moi</h1>
             <form id ="contact-form" name="contact-form" class="mx-md-5"  action="mail.php" onsubmit="return validateForm()" >
             <div class="row">
               <div class="col-md-6 mb-4">
@@ -12,7 +12,7 @@
                   <div class="card-body px-4">
                     <div class="md-form md-outline mt-0">
                       <input type="text" id="name" name="name" class="form-control">
-                      <label for="name">Votre nom</label>
+                      <label for="name">Votre pseudo</label>
                     </div>
                     <div class="md-form md-outline">
                       <input type="text" id="email" name="email" class="form-control">
@@ -56,7 +56,7 @@
       </section>
       </div>
       <div class="text-center">
-        <p class="gbh-c"><a type="button" class="btn-floating btn-lg blue-gradient" href="index" title="retour à la page d'accueil"><i class="fas fa-home"></i></a></p>
+        <p class="gbh-c"><a type="button" class="btn-floating btn-lg blue-gradient pulse-button z-depth-5" href="index" title="retour à la page d'accueil"><i class="fas fa-home"></i></a></p>
       </div> 
  
 <?php  $content = ob_get_clean (); ?>

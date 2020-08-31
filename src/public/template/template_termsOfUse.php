@@ -20,6 +20,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
     <!-- CSS -->
     <link rel="stylesheet" href="./src/public/assets/css/style.css" />
+    <link rel="stylesheet" href="./src/public/assets/css/layout.css" />
     <title><?= $title ?></title>
 </head>
 

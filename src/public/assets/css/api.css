@@ -1,11 +1,3 @@
-@font-face {
-    font-family: 'danielregular';
-    src: url('/src/public/assets/css/fonts/daniel-regular-webfont.woff2') format('woff2'),
-         url('/src/public/assets/css/fonts/daniel-regular-webfont.woff') format('woff');
-          
-    font-weight: normal;
-    font-style: normal;
-}
 .clear {
     background-image: url(../../images/sun.jpg);
 }
@@ -18,56 +10,15 @@
 .snow {
     background-image: url(../../images/snowflake.jpg);
 }
+.haze {
+     background-image: url(../../images/fog.jpg);
+}
 
 body {
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
-a.navbar-brand >img.logo-content { 
-    width: 50px; 
-}
-.navbar{ 
-    background-color: transparent; 
-}
-.top-nav-collapse { 
-    background-color: rgba(47, 174, 156, 0.82) !important; 
-}
-.nav-link:hover { 
-    background-color: rgb(65, 188, 225); 
-    color: aquamarine !important; 
-}
-.dropdown-menu { 
-    background-color: #99dee699; 
-}
-img.logo-content { 
-    width: 50px; 
-}
-.navbar-brand { 
-    font-size: 10px; 
-}
-span.colored-logo { 
-    font-family: "danielregular"; 
-    color: aquamarine; 
-    text-shadow: 1px 5px 2px #1aafc8; 
-}
-.navbar.navbar-dark .navbar-nav .nav-item .nav-link { 
-    background-color: transparent !important;
-    color: black; 
-    border-radius: 10px; 
-}
-#profileDisplay {
-    display: block; 
-    width: 60%;
-    height: 210px; 
-    margin: 0px auto; 
-    border-radius: 50%; 
-}
-#avatarResize { 
-    width: 50px; 
-    height: 50px; 
-    margin: 0px auto; 
 }
 .text-pos { 
     text-align-last: center; 
@@ -80,8 +31,10 @@ span.colored-logo {
 }
 .btn.btn-lg {
     position: relative;
-    top: -62px;
-    left: 81px;
+    top: -60px;
+    left: 90px;
+    padding: 15px;
+    border-radius: 50%;
 }
 .box-container {
     position: relative;
@@ -90,18 +43,36 @@ span.colored-logo {
     height: 600px;
     display: flex;
     flex-wrap: wrap;
+    border: 0.5px solid aquamarine;
+    box-shadow: 1em 0 1em #05ffa3, -1em 0 2em #2096ff;
 }
 .box {
-    width: 200px;
+    width: 199px;
     height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
+    font-weight: 300;
+    font-family: cursive;
+}
+#city img {
+    width: 45%;
+}
+#temp img {
+    width: 26%;
+}
+#humidity img {
+    width: 60%;
+    position: absolute;
+    top: 184px;
 }
 #wind img {
-    width: 60px;
+    width: 90%;
+}
+#pressure img {
+    width: 45%;
 }
 button.refresh:hover {
     box-shadow: inset 10px 4px 18px #43a1ad77, 5px 5px 18px #1a8c9b8e;
@@ -129,17 +100,12 @@ button.refresh:hover {
     background-color: rgba(78, 198, 153, 0.25);
     color: #0b0b0a;
 }
-.perso-hr {
-    margin-top: 0.2rem;
-    border: 0px;
-    border-top: 2px solid aquamarine;
-    width: 35px;
-    margin-right: 250px;
-    margin-bottom: -0.5rem;
+.btn.aqua-gradient {
+    border: 1px solid aqua;
 }
 
-@media only screen and (max-width: 600px) {
-
+/* ***************Media Queries************** */
+@media only screen and (max-width: 768px) {
     body {
         height: 134vh;
     }
@@ -147,18 +113,45 @@ button.refresh:hover {
         max-width: 100%;
     }
     .box-container {
-        bottom: 13%;
+        bottom: 5%;
     }
     .box {
-        width: 135px;
-        height: 135px;
-        font-size: 17px;
+        width: 134px;
+        height: 119px;
+        font-size: 16px;
+    }
+    #temp img {
+        width: 20%;
+    }
+    #humidity img {
+        width: 84%;
+        position: absolute;
+        top: 238px;
+    }
+    #wind img {
+        width: 65%;
+    }
+    #pressure img {
+        width: 60%;
     }
     .form-control {
         width: 200px;
     }
+    span#current_time {
+        font-size: 13px !important;
+        color: #f9e8e8;
+        text-shadow: 0 0 5px aquamarine;
+    }
     .btn.btn-lg {
         padding: 14px;
         border-radius: 50%;
+    }
+    .fa-redo-alt {
+        color: rebeccapurple;
+        text-shadow: 0 0 5px aquamarine;
+    }
+    .my-3 {
+        margin-bottom: 0;
+        margin-top: 0;
     }
 }

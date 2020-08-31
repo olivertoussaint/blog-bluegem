@@ -16,18 +16,14 @@
                            <a class="nav-link" href="index.php?action=listNews">Le blog</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actualité
-                            </a>
-                            <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-3">
-                                <a class="dropdown-item" href="index.php?action=listNews&id=2">Réchauffement climatique</a>
-                                <a class="dropdown-item" href="index.php?action=signIn">Santé</a>
-                                <a class="dropdown-item" href="index.php?action=signIn">Activité humaine</a>
-                                <a class="dropdown-item" href="index.php?action=signIn">Spiritualité/Astrologie</a>
-                                <a class="dropdown-item" href="index.php?action=listNews">Toute l'actu</a>
-                            </div>
+                           <a class="nav-link dropdown-toogle" id="navbarDropdownMenuLink-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Forum</a>
+                           <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-3">
+                            <a class="dropdown-item" href="index.php?action=forums">Les forums</a>
+                            <a class="dropdown-item" href="index.php?action=topics">Les topics</a>
+                           </div>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="index.php?action=forum">Le forum</a>
+                          <a class="nav-link" href="index.php?action=weather_api">Actu m&eacute;t&eacute;o</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">

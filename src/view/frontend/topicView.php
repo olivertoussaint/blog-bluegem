@@ -1,7 +1,8 @@
 <?php $title = 'Topic'; ?>
 <?php  ob_start (); ?>
 
-      <div class="container white mt-6 mb-5 py-4 shadow-lg shadow-border">
+<h1 class="font-weight-light text-center mt-6 fs-title">Les topics</h1>
+      <div class="container cyan lighten-3 mt-4 mb-5 py-4 shadow-lg shadow-border">
          <div class="row">
             <table class="table table-responsive table-hover">
                <thead class="black white-text">
@@ -13,7 +14,8 @@
                   </tr>
                </thead>
                <tbody>
-                  <?php while($t =$topics->fetch()) { ?>
+                  <?php 
+                  while($t = $topics->fetch()) { ?>
                      <tr>
                         <td class="main px-3">
                            <h6><a href=""><?=$t['title'] ?></a></h6>
@@ -22,7 +24,7 @@
                         <td class="sub-info">30.07.2020 à 18h07<br /> de Olivier33</td>
                         <td class="sub-info text-center">
                            <?= $t['date_c']?>
-                           <span class="badge badge-info">par Anonyme</span>
+                           <span class="badge badge-info"><?= $t['pseudo'] ?></span>
                         </td>
                      </tr>
                   <?php } ?>

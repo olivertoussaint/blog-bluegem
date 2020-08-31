@@ -12,48 +12,12 @@
 body { 
     background-image: linear-gradient(120deg, #249ece 0%, #2beac6 100%); 
 }
-a.navbar-brand >img.logo-content { 
-    width: 50px; 
-}
-.navbar{ 
-    background-color: transparent; 
-}
-.navbar.navbar-dark .navbar-nav .nav-item .nav-link { 
-    color: black; 
-    border-radius: 10px; 
-}
-.top-nav-collapse { 
-    background-color: rgba(47, 174, 156, 0.82) !important; 
-}
-.nav-link:hover { 
-    /* background-color: rgb(65, 188, 225);  */
-    color: aquamarine !important; 
-}
-.dropdown-menu { 
-    background-color: #99dee699; 
-}
-img.logo-content { 
-    width: 50px; 
-}
-.navbar-brand { 
-    font-size: 10px; 
-}
-span.colored-logo { 
-    font-family: "danielregular"; 
-    color: aquamarine; 
-    text-shadow: 1px 5px 2px #1aafc8; 
-}
 #profileDisplay { 
     display: block; 
     width: 60%; 
     height: 210px; 
     margin: 0px auto; 
     border-radius: 50%; 
-}
-#avatarResize { 
-    width: 50px; 
-    height: 50px; 
-    margin: 0px auto; 
 }
 .styli { 
     font-family: "danielregular";
@@ -95,9 +59,15 @@ select {
     margin-top: 15px; 
 }
 .f-title { 
+    font-family: "danielregular";
+    text-shadow: 10px 10px 10px black;
     position: absolute; 
-    top: 126px; 
+    top: 14px; 
     left: 45%; 
+}
+.fs-title {
+    font-family: "danielregular";
+    text-shadow: 10px 10px 10px black;
 }
 .main { 
     width: 35%; 
@@ -115,11 +85,16 @@ select {
     border-top: 2px solid rgb(221, 241, 225); 
     padding: 10px 0;
 }
- input[type="text"].pdg{ 
-     padding: 5px; 
-     border: none; 
-     border-radius: 3px; 
-    }
+ input[type="text"].pdg { 
+    padding: 5px; 
+    width: 50%;
+    color: #6a6868;
+    border: none; 
+    border-radius: 3px; 
+}
+p.topic {
+    margin-bottom: 0;
+}
 .border-flt { 
     color: #ccc; 
     font-size: 10px; 
@@ -161,7 +136,8 @@ h5.card-header {
     width: 100%; 
     position: relative; 
     top: 0; 
-    left: 0; 
+    left: 0;
+    font-family: "danielregular"; 
 }
 .shadow-border { 
     border-radius: 15px; 
@@ -203,20 +179,17 @@ h5.card-header {
     align-items: center;
     justify-content: center;
     background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+    padding: 5px;
     border: 0;
     border-radius: 0 10px 10px 0;
 }
 .fa-arrow-left { 
     color: wheat; 
 }
-.custom-backGd { 
-    background-color: #c7dbc570 !important; 
-}
-.ntopic-forum { 
-    border-collapse : separate; border-spacing : 15px; 
-}
 .nwt { 
-    padding: 5px; 
+    padding: 2px 10px 2px 10px;
+    border-radius: 5px;
+    color: darkblue;
 }
 .mt-6 { 
     margin-top: 5.9rem; 
@@ -239,7 +212,8 @@ h5.card-header {
     padding: 0;
 }
 .form-group {
-    background-color: azure;
+    width: 60%;
+    margin-left: 20%;
 }
 p input[type=text] {
     width: 100%;
@@ -247,22 +221,39 @@ p input[type=text] {
     color: grey;
     border: none;
 }
+.error {
+    position: relative;
+    top: 8px;
+    color: #38373e;
+    text-shadow: 3px 0px 10px #39ffd1;
+}
 
-
-@media only screen and (max-width: 600px) {
-    h1 {
-        font-size: 25px;
+/* ***************Media Queries************** */
+@media only screen and (max-width: 768px) {
+    .mt6 h1 {
+        font-size: x-large;
     }
     .f-title {
         position: absolute;
-        top: 139px;
+        top: 25px;
         left: 45%;
+        font-size: 24px;
+    }
+    .fs-title {
+        font-size: 24px;
+    }
+    a.nav-c {
+        padding: 3px;
+        font-size: 10px;
+    }   
+    input[type="text"].pdg { 
+        width: 100%;
     }
     .col-6 {
         max-width: 100%;
     }
     h5 {
-        font-size: 15px;
+        font-size: small;
     }
     .resize-error { 
         font-size: 0.60em; 
@@ -271,6 +262,39 @@ p input[type=text] {
     }
     .perso-hr { 
         margin-right: 151px; 
-    } 
+    }
+    .nwt {
+        font-size: small;
+    }
+    .select2-container .select2-search--inline 
+    .select2-search__field {
+        font-size: small;
+    }
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        font-size : small;
+    }
+    .col-5 {
+        max-width: 100%;
+    }
+    .form-group {
+        width: 100%;
+        margin-left: 0;
+    }
+    .error {
+        width: 300px;
+        font-size: 12px;
+    }
+    .main {
+        width: 25%;
+        padding-right: 0;
+    }
+    table th {
+        font-size: 8px;
+    }
+    h6, table td {
+        font-size: 10px;
+    }
+    .sub-info {
+        width: 25%;
+    }
 }
-

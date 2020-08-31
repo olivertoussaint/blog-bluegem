@@ -81,11 +81,10 @@ class UserController {
 	function signIn() {
 		require('src/view/frontend/signInView.php');
     }
-    
     function weather() {
         require('src/view/frontend/apiView.php');
     } 
-       
+    
     function updateProfile() {   
         $msg = "";
         $css_class ="";
@@ -192,27 +191,44 @@ class UserController {
             require('src/view/frontend/forumView.php');
     }
 
-    function getTopic() {
-        $newsManager = new NewsManager();
-        $topics = $newsManager->getTopic();
-
+    function getTopics() {
         if(isset($_GET['categorie']) AND !empty($_GET['categorie'])) {
-            $get_category = htmlspecialchars($_GET['categorie']);
+            $id_categorie = htmlspecialchars($_GET['categorie']);
+            
+            if(isset($_GET['souscategorie']) AND !empty($_GET['souscategorie'])) {
+                $id_souscategorie = htmlspecialchars($_GET['souscategorie']);
+                $newsManager = new NewsManager();
+                $topics = $newsManager->getTopic($id_categorie, $id_souscategorie);
+                $topics .="AND f_subcategories.id = ?";
+                $exec_array = array($id_categorie, $id_souscategorie);
+                
+
+
+            }else {
+                $exec_array = array($id_categorie);
+            }
+            require('src/view/frontend/topicView.php'); 
+        }
+        else {
+            // die('Erreur: Catégorie introuvable...');
+            //je n'ai pas de categories que dois je faire ?
+            //je récupère tout ou exception ?
+
         }
 
-        $commentManager = new CommentManager();
-        $comments = $commentManager->getTopicComments();
-        require('src/view/frontend/topicView.php'); 
+        // $commentManager = new CommentManager();
+        // $comments = $commentManager->getTopicComments();
+        
     }
+
 
     function newTopicForm() {
         require ('src/view/frontend/newTopicView.php');
     }
 
     function getNewTopic() {
-        $terror = "";
-        // die(var_dump($sujet,$contenu,$notif_mail));
-        if(isset($_SESSION['id'])AND !empty($_SESSION)) {
+        // $terror = "";
+        if(isset($_SESSION['id'])) {
             if(isset($_POST['tsubmit'])) {
                 if(isset($_POST['tsujet'],$_POST['tcontenu'])) {
                     $sujet = htmlspecialchars($_POST['tsujet']);

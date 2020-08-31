@@ -43,7 +43,7 @@
                   ?>
               </h6>
                   
-              <h6 class="font-weight-bold z-depth-5 lime accent-3 mb-3 py-2 rounded perso-fontSize">
+              <h6 class="font-weight-bold z-depth-5 mb-3 py-2 rounded perso-fontSize">
                 <?php
                     $news_title = substr($data['news_title'],0, 40);
                     echo $news_title."...";
@@ -91,4 +91,3 @@
 
 	<?php  $content = ob_get_clean (); ?>
 	<?php require('src/public/template/template_news.php'); ?>
-

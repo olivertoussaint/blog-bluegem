@@ -25,11 +25,17 @@
                 <div id="wind" class="box"></div>
                 <div id="sunset" class="box"></div>
                 <div id="sunrise" class="text-right box"></div>
-                <div id="pressure" class="box"></div>                
+                <div id="pressure" class="box"></div> 
+                 
             </div>
+                
+        </div>
+        
+        <div class="col-12 d-flex justify-content-center">
+            <p class="white-text text-center z-depth-3 py-3 px-3"><span id="current_time"></span></p>
         </div>
     </div>
 </div>
 
 <?php  $content = ob_get_clean (); ?>
-<?php require('src/public/template/template_api.php'); ?>
+<?php require('src/public/template/template_api.php'); ?> 

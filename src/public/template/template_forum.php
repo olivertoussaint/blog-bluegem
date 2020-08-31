@@ -20,7 +20,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- css -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/public/assets/css/layout.css" />
     <link rel="stylesheet" href="./src/public/assets/css/forum.css" />
     <title><?= $title ?></title>
 </head>

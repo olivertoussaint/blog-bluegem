@@ -12,33 +12,6 @@
  body {
      background-image: linear-gradient(120deg, #249ece 0%, #2beac6 100%); 
 }
-a.navbar-brand >img.logo-content { 
-    width: 50px; 
-}
-.navbar{ 
-    background-color: transparent; 
-}
-.top-nav-collapse { 
-    background-color: rgba(47, 174, 156, 0.82) !important; 
-}
-.nav-link:hover { 
-    background-color: rgb(65, 188, 225); 
-    color: aquamarine !important; 
-}
-.dropdown-menu { 
-    background-color: #99dee699; 
-}
-img.logo-content { 
-    width: 50px; 
-}
-.navbar-brand { 
-    font-size: 10px; 
-}
-span.colored-logo { 
-    font-family: "danielregular"; 
-    color: aquamarine; 
-    text-shadow: 1px 5px 2px #1aafc8; 
-}
 .background-c {
     background-color: white; 
     border-radius: 0 20px 0;   
@@ -49,11 +22,11 @@ span.colored-logo {
 .p-shadow-5 { 
     box-shadow: 0 27px 44px 0 rgba(58, 247, 158, 0.61),0 40px 77px 0 rgba(21, 145, 151, 0.38) !important;
 }
-.navbar.navbar-dark .navbar-nav .nav-item .nav-link { 
+/* .navbar.navbar-dark .navbar-nav .nav-item .nav-link { 
     background-color: transparent !important;
     color: black; 
     border-radius: 10px; 
-}
+} */
 .container-fluid { 
     max-width: 100%; 
     height: 915px;
@@ -71,15 +44,9 @@ span.colored-logo {
     margin: 0px auto; 
     border-radius: 50%; 
 }
-#avatarResize { 
-    width: 50px; 
-    height: 50px; 
-    margin: 0px auto; 
-}
 .text-shad { 
     text-shadow: 1px 1px 2px #50ff00, 0 0 1em #ff8300, 0 0 0.2em #b9b9c4; 
 }
-
 .img-placeholder {
     width: 60%;
     color: white;
@@ -146,7 +113,7 @@ span.colored-logo {
     margin-top: 5.9rem; 
 }
 .date {
-    color: #baf0c2;
+    color:white;
 }
 .ml-n12 { 
     margin-left: -13.5rem; 
@@ -208,8 +175,9 @@ hr {
 .direction { 
     float: left; 
 }
-.btn.purple-gradient a, .btn.aqua-gradient a { color: white; }
-
+.btn.purple-gradient a, .btn.aqua-gradient a { 
+    color: white; 
+}
 .stylish-color-perso { 
     background-color: #294646 !important; 
 }
@@ -271,7 +239,7 @@ a.pagination, .page-item.active .page-link {
     border-radius: 15px; 
 }
 
-
+/* ***************Media Queries************** */
 @media only screen and (max-width: 768px) {
     .fzr { 
         font-size: 11px; 
@@ -290,6 +258,9 @@ a.pagination, .page-item.active .page-link {
     }
     .noCmmt { 
         margin-left: 30px; 
+    }
+    .psp {
+        margin-top: 1rem;
     }
     .rzc { 
         width: auto; 
@@ -320,4 +291,3 @@ a.pagination, .page-item.active .page-link {
         padding: 2px 5px 2px 5px;
     }
 }
-

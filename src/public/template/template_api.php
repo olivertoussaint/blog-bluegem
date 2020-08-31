@@ -19,8 +19,9 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
     <!-- CSS -->
+    <link rel="stylesheet" href="./src/public/assets/css/layout.css" />
     <link rel="stylesheet" href="./src/public/assets/css/api.css" />
-
+    
     <title><?= $title ?></title>
 </head>
 
@@ -41,5 +42,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+    <!-- Moment -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data-10-year-range.js"></script>
+    <!-- Luxon -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/luxon/1.25.0/luxon.min.js"></script>
     <!-- Javascript -->
     <script type="text/javascript" src="./src/public/assets/js/api.js"></script>
