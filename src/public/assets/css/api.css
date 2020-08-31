@@ -57,6 +57,13 @@ body {
     font-weight: 300;
     font-family: cursive;
 }
+#feels_like, #visibility {
+    text-align: center;
+    font-size: 17px;
+}
+#visibility img {
+    width: 110px;
+}
 #city img {
     width: 45%;
 }
@@ -66,7 +73,7 @@ body {
 #humidity img {
     width: 60%;
     position: absolute;
-    top: 184px;
+    top: 67%;
 }
 #wind img {
     width: 90%;
@@ -78,17 +85,10 @@ button.refresh:hover {
     box-shadow: inset 10px 4px 18px #43a1ad77, 5px 5px 18px #1a8c9b8e;
     color: white;
 }
-#temp {
-    background-color: rgba(43, 78, 101, 0.75);
-    color:white;
-}
-#humidity {
-    background-color: rgba(76, 83, 144, 0.75);
-    color:white;
-}
-#wind {
-    background-color: rgba(108, 153, 45, 0.75);
-    color:white;
+#temp, #humidity, #wind {
+    background-color: rgba(78, 198, 153, 0.25);
+    color: #a4e419;
+    text-shadow: 0 5px 10px;
 }
 #icon {
     background-color: rgba(160, 215, 63, 0.15);
@@ -96,9 +96,10 @@ button.refresh:hover {
 #icon img{
      width: 80px;
 }
-#city, #description, #sunset, #sunrise, #pressure {
+#city, #description, #feels_like, #visibility, #pressure {
     background-color: rgba(78, 198, 153, 0.25);
-    color: #0b0b0a;
+    color: #15444f;
+    text-shadow: 0 5px 10px;
 }
 .btn.aqua-gradient {
     border: 1px solid aqua;
@@ -126,10 +127,10 @@ button.refresh:hover {
     #humidity img {
         width: 84%;
         position: absolute;
-        top: 238px;
+        top: 355px;
     }
     #wind img {
-        width: 65%;
+        width: 93%;
     }
     #pressure img {
         width: 60%;

@@ -21,10 +21,10 @@
                 <div id="description" class="text-center box"></div>
                 <div id="city" class="text-center box"></div>
                 <div id="temp" class="box"></div>
+                <div id="feels_like" class="box"></div>
+                <div id="visibility" class="box"></div>     
                 <div id="humidity" class="box"></div>
                 <div id="wind" class="box"></div>
-                <div id="sunset" class="box"></div>
-                <div id="sunrise" class="text-right box"></div>
                 <div id="pressure" class="box"></div> 
                  
             </div>
