@@ -20,8 +20,22 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.text-pos { 
-    text-align-last: center; 
+.overlay-icon-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1.1s ease-out;
+    z-index: 1000;
+}
+.overlay-icon-loading img{
+    width: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.disappear {
+    opacity: 0;
 }
 .stylish-color-perso { 
     background-color: #294646 !important; 
@@ -73,7 +87,7 @@ body {
 #humidity img {
     width: 60%;
     position: absolute;
-    top: 67%;
+    top: 69%;
 }
 #wind img {
     width: 90%;
@@ -93,8 +107,8 @@ button.refresh:hover {
 #icon {
     background-color: rgba(160, 215, 63, 0.15);
 }
-#icon img{
-     width: 80px;
+#icon img {
+     width: 235px;
 }
 #city, #description, #feels_like, #visibility, #pressure {
     background-color: rgba(78, 198, 153, 0.25);
@@ -124,16 +138,19 @@ button.refresh:hover {
     #temp img {
         width: 20%;
     }
+    #visibility img {
+        width: 76px;
+    }
     #humidity img {
         width: 84%;
         position: absolute;
-        top: 355px;
+        top: 365px;
     }
     #wind img {
         width: 93%;
     }
     #pressure img {
-        width: 60%;
+        width: 45%;
     }
     .form-control {
         width: 200px;
