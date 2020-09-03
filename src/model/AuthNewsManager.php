@@ -8,6 +8,13 @@ use Projet\model\Manager;
 
 class AuthNewsManager extends Manager {
 
+    /**
+     * Fonction qui affiche les articles et la pagination
+     *
+     * @param [int] $currentPage
+     * @param [int] $newsPerPage
+     * @return string|int
+     */
     public function getNews($currentPage, $newsPerPage) {
         $start   = ($currentPage-1)*$newsPerPage; // si currentPage =1 $start =0 si $currentPage =2 alors $start vaut 3
         $db      = $this->dbConnect();    
@@ -16,6 +23,12 @@ class AuthNewsManager extends Manager {
         return $news;  
     }
 
+    /**
+     * Fonction affichant un fil d'actualité et son ID
+     *
+     * @param [int] $newsId
+     * @return int
+     */
     public function getFeedNews($newsId)
 	{
 		$db      = $this->dbConnect();
@@ -26,6 +39,16 @@ class AuthNewsManager extends Manager {
 		return $news;
 	}
 
+    /**
+     * Fonction modification de l'article
+     *
+     * @param [string] $title
+     * @param [string] $content
+     * @param [string] $author
+     * @param [string] $category
+     * @param [int] $id
+     * @return string|int
+     */
     public function editNewsFeed($title, $content, $author, $category, $id) 
     {
         $db              = $this->dbConnect();
@@ -35,6 +58,16 @@ class AuthNewsManager extends Manager {
         return $editedNewsFeed;
     }
 
+    /**
+     * Fonction création d'un nouvel article
+     *
+     * @param [string] $title
+     * @param [string] $content
+     * @param [string] $author
+     * @param [string] $image
+     * @param [int] $category
+     * @return string|int
+     */
     public function createFeedNews($title, $content, $author, $image, $category)
     {
         $db               = $this->dbConnect();
@@ -44,6 +77,12 @@ class AuthNewsManager extends Manager {
         return $newFeedNews; 
     }
 
+    /**
+     * Fonction suppression d'un fil d'actualité 
+     *
+     * @param [int] $newsId
+     * @return int
+     */
     public function removeNewsFeed($newsId)
 	{
 		$db                = $this->dbconnect();
@@ -53,6 +92,12 @@ class AuthNewsManager extends Manager {
         return $removedNewsFeed;
     }	
     
+    /**
+     * Fonction suppession d'un membre
+     *
+     * @param [int] $memberId
+     * @return int
+     */
     public function deleteMember($memberId)
     {
         $db               = $this->dbConnect();

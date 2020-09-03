@@ -8,6 +8,13 @@ use Projet\model\Manager;
 
 class AccountManager extends Manager {
 
+    /**
+     * Fonction de contrôle de saisie du pseudo et de l'email
+     *
+     * @param [string] $pseudo
+     * @param [string] $email
+     * @return string
+     */
 	function controlSignUp($pseudo, $email) 
 	{
         $db       = $this->dbConnect();
@@ -17,6 +24,12 @@ class AccountManager extends Manager {
         return $request;
     }
 
+    /**
+     * Fonction login avec avatar
+     *
+     * @param [string] $pseudo
+     * @return string
+     */
 	function loginMember($pseudo)
     {
         $db        = $this->dbConnect();
@@ -27,6 +40,12 @@ class AccountManager extends Manager {
         return $logMember;
     }
 
+    /**
+     * fonction vérification du pseudo
+     *
+     * @param [string] $pseudo
+     * @return string
+     */
     function checkPseudo($pseudo)
     {
         $db             = $this->dbConnect();
@@ -37,6 +56,12 @@ class AccountManager extends Manager {
         return $pseudoChecked;
     }
 
+    /**
+     * Fonction vérification du email
+     *
+     * @param [string] $email
+     * @return string
+     */
     function checkMail($email) {
         $db            = $this->dbconnect();
         $request       = $db->prepare('SELECT email FROM members WHERE email = ?');
@@ -46,6 +71,14 @@ class AccountManager extends Manager {
         return $emailChecked;
     } 
 
+    /**
+     * Fonction création d'un membre
+     *
+     * @param [string] $pseudo
+     * @param [string] $email
+     * @param [string] $password
+     * @return string
+     */
 	function createMember($pseudo, $email, $password) 
 	{
         $db           = $this->dbConnect();
@@ -54,7 +87,13 @@ class AccountManager extends Manager {
             
         return $newMember;           
     }
-
+    
+    /**
+     * Fonction obtention de l'avatar
+     *
+     * @param [string] $avatar
+     * @return string
+     */
     function getAvatar($avatar) {
         $db         = $this->dbConnect();
         $displayAvatar = $db->prepare('SELECT id, avatar FROM members WHERE id = ? ');
@@ -63,6 +102,12 @@ class AccountManager extends Manager {
         return $displayAvatar;
     }
 
+    /**
+     * Fonction màj del'avatar
+     *
+     * @param [string] $profileImageName
+     * @return string
+     */
     function updateAvatar($profileImageName) {
         $db               = $this->dbConnect();
         $updatedProfile   = $db->prepare("UPDATE members SET avatar = ?  WHERE id = ?");
@@ -71,6 +116,12 @@ class AccountManager extends Manager {
         return $updatedProfile;
     }
 
+    /**
+     * Fonction modification du mot de passe
+     *
+     * @param [string] $hashedPassword
+     * @return string
+     */
     function editPassword($hashedPassword) {
         $db               = $this->dbConnect();
         $stmt             = $db->prepare("UPDATE members SET password = ? WHERE email = ?");
@@ -79,6 +130,11 @@ class AccountManager extends Manager {
         return $editedPassword;
     }
     
+    /**
+     * Fonction qui affiche les infos d'un membre 
+     * réservé à l'admin
+     * @return int|string
+     */
     function getMembers() 
     {
         $db      = $this->dbConnect();
@@ -87,6 +143,11 @@ class AccountManager extends Manager {
         return $members;
     }
 
+    /**
+     * Fonction qui compte le nombre de commentaires
+     *
+     * @return int
+     */
     public function inTable()
     {
         $db     = $this->dbconnect();

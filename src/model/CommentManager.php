@@ -8,6 +8,12 @@ use Projet\model\Manager;
 
 class CommentManager extends Manager
 {
+    /**
+     * Fonction permettant d'obtenir les commentaires par l'ID
+     *
+     * @param [int] $newsId
+     * @return int
+     */
     public function getComments($newsId)
     {
         
@@ -18,6 +24,11 @@ class CommentManager extends Manager
         return $req;
     }
 
+    /**
+     * Fonction permettant d'obtenir les commentaires d'un topic
+     *
+     * @return string|int
+     */
     public function getTopicComments()
     {
         $db    = $this->dbConnect();
@@ -28,6 +39,12 @@ class CommentManager extends Manager
         return $req;
     }
 
+    /**
+     * Fonction validation du commentaire avec l'ID
+     *
+     * @param [int] $newsId
+     * @return int
+     */
     public function validatecomment($newsId)
     {
         $db                = $this->dbconnect();
@@ -37,6 +54,14 @@ class CommentManager extends Manager
         return $validatedcomment;
     }
     
+    /**
+     * Fonction commentaire de l'article par les ID's article, membre, et commentaire
+     *
+     * @param [int] $newsId
+     * @param [int] $memberId
+     * @param [string] $comment
+     * @return int|string
+     */
     public function newsComment($newsId, $memberId, $comment)
     {
         $db               = $this->dbConnect();
@@ -50,6 +75,12 @@ class CommentManager extends Manager
         return $displayComments;       
     }
 
+    /**
+     * Fonction suppression du commentaire et de l'ID
+     *
+     * @param [int] $commentId
+     * @return void
+     */
      public function deleteComment($commentId) 
      {
         $db              = $this->dbConnect();
@@ -59,6 +90,12 @@ class CommentManager extends Manager
         return $deletedComment;
      } 
 
+     /**
+      * Fonction suppression du commentaire de l'article et de son ID
+      *
+      * @param [int] $newsId
+      * @return void
+      */
      public function deleteCommentNews($newsId)
      {
         $db                  = $this->dbConnect();
@@ -68,6 +105,12 @@ class CommentManager extends Manager
         return $deletedCommentNews;
      }  
 
+     /**
+      * Fonction signalement d'un article
+      * definie à 0 par défaut
+      * @param [int] $newsId
+      * @return int
+      */
     public function reporting($newsId)
     {
         $db               = $this->dbconnect();
@@ -77,6 +120,11 @@ class CommentManager extends Manager
         return $reportedComment;
     }
 
+    /**
+     * Fonction permettant d'afficher tous les signalements
+     * Réservé à l'admin 
+     * @return int|string
+     */
     public function getReporting()
     {
       $db             = $this->dbConnect();  
@@ -87,6 +135,12 @@ class CommentManager extends Manager
 
     }
 
+    /**
+     * Fonction comptage du nombre de commentaires
+     *
+     * @param [int] $newsId
+     * @return int
+     */
     public function countNumberComments($newsId)
     {
         $db            = $this->dbConnect();

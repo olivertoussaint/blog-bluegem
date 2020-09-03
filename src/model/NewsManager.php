@@ -7,15 +7,28 @@ use Projet\model\Manager;
 
 class NewsManager extends Manager {
 
+    /**
+     * Fonction qui affiche les articles et la pagination
+     *
+     * @param [int] $currentPage
+     * @param [int] $newsPerPage
+     * @return string|int
+     */
     public function getNews($currentPage, $newsPerPage) 
     {
-        $start  =($currentPage-1)*$newsPerPage; // si currentPage =1 $debut =0 si $currentPage =2 alors $debut vaut 3
+        $start  = ($currentPage-1)*$newsPerPage;
         $db     = $this->dbConnect();    
         $news   = $db->query('SELECT news.id_news, news.news_title , news.news_content, news.author, members.pseudo, news.news_image, news.id_category, DATE_FORMAT(news.publication_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM news inner join members on members.id = news.author ORDER BY publication_date DESC LIMIT '.$start.','.$newsPerPage);
 
         return $news;  
     }
 
+    /**
+     * Fonction qui affiche l'article à l'aide de son ID
+     *
+     * @param [int] $newsId
+     * @return string|int 
+     */
     public function latestNews($newsId) 
     {
         $db           = $this->dbConnect();
@@ -26,6 +39,14 @@ class NewsManager extends Manager {
 		return $newsFeed;
     }
 
+    /**
+     * Fonction pour effectuer une màj de l'article
+     *
+     * @param [string] $title
+     * @param [string] $content
+     * @param [int] $id_news
+     * @return string|int 
+     */
     public function updateNewsFeed($title, $content, $id_news )
     {
         $db                = $this->dbConnect();
@@ -35,6 +56,13 @@ class NewsManager extends Manager {
         return $updatedNewsFeed;
     }
 
+    /**
+     * Fonction permettant la création d'un nouvel article
+     *
+     * @param [string] $title
+     * @param [string] $content
+     * @return string
+     */
     public function createNewsFeed($title, $content) 
     {
         $db                 = $this->dbConnect();
@@ -44,6 +72,12 @@ class NewsManager extends Manager {
         return $createdNewsFeed ;
     }
 
+    /**
+     * Fonction supprimant un article et son ID
+     *
+     * @param [int] $newsId
+     * @return int
+     */
     public function deleteNews($newsId)
     {
         $db             = $this->dbConnect();
@@ -53,6 +87,11 @@ class NewsManager extends Manager {
         return $deletedNews;
     }
 
+    /**
+     * Fonction d'affichage de l'article
+     *
+     * @return string|int
+     */
     public function displayNewsFeed()
     {
         $db                  = $this->dbConnect();
@@ -63,7 +102,11 @@ class NewsManager extends Manager {
         return $displayNewsFeed;    
     }
     
-
+    /**
+     * Fonction permettant l'obtention de la sous-catégorie par son ID
+     *
+     * @return int|string
+     */
     public function getSubCategories()
     {
         $db                  = $this->dbConnect();
@@ -72,6 +115,11 @@ class NewsManager extends Manager {
         return $subCategories;
     }
 
+    /**
+     * Fonction permettant l'obtention de la catégorie
+     *
+     * @return int|string
+     */
     public function getCategories()
     {
         $db                  = $this->dbConnect();
@@ -80,15 +128,13 @@ class NewsManager extends Manager {
         return $categories;
     }
 
-    // public function getSubjects($id)
-    // {
-    //     $db                  = $this->dbConnect();
-    //     $subjects            = $db->prepare("SELECT *,DATE_FORMAT(creation_date, 'Le %d/%m/%Y à %H\h%i') as date_c FROM f_topics WHERE id_forum = ? ORDER BY creation_date DESC");
-    //     $subjects            ->execute(array($id));
-        
-    //     return $subjects;
-    // }
-
+    /**
+     * Fonction permettant l'obtention du topic avec les ID's de la catégorie et sous-catégorie
+     *
+     * @param [int] $id_categorie
+     * @param [int] $id_subcategorie
+     * @return int
+     */
     public function getTopic($id_categorie, $id_subcategorie)
     {
         $db                  = $this->dbConnect();        
@@ -112,6 +158,14 @@ class NewsManager extends Manager {
         return $topics;
     }
 
+    /**
+     * Fonction pour créer un nouveau topic
+     *
+     * @param [string] $sujet
+     * @param [string] $contenu
+     * @param [int] $notif_mail
+     * @return string|int
+     */
     public function getANewTopic($sujet,$contenu,$notif_mail)
     {
         $db                  = $this->dbConnect();
