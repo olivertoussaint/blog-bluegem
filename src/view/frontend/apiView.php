@@ -2,6 +2,9 @@
 <?php  ob_start (); ?>
 
 <div class="container mt-6 mb-3">
+    <!-- <div class="overlay-icon-loading">
+        <img src="../../src/public/icons/svg/circles.svg" alt="logo chargement">
+    </div> -->
 <div class="row justify-content-center">
         <div class="col-2 col-sm-3 my-3">        
             <form action="">
